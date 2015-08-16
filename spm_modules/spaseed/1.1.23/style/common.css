@@ -1,0 +1,129 @@
+.disabled{
+	opacity: 0.5;
+}
+/* ----------------- wx share ----------------- */
+.popup-wxshare{
+  width: 100%;
+  height:6.83rem;
+  position: absolute;
+  top:1.25rem;
+  right:0;
+  z-index: 10;
+}
+.popup-wxshare .share-wx{
+  width: 7rem;
+  height:4.33rem;
+  position: absolute;
+  top:0;
+  right:2rem;
+  background:url(image/wx_share.png) no-repeat top right;
+  background-size: 100%;
+  font-size: 0;
+}
+.popup-wxshare .pay-wx{
+  width:8.92rem;
+  height:3.92rem;
+  position: absolute;
+  top:0;
+  right:2rem;
+  background:url(image/wx_pay.png) no-repeat top right;
+  background-size: 100%;
+  font-size: 0;
+}
+.popup-wxshare .icon-close{
+  width:7.5rem;
+  height:2.5rem;
+  position: absolute;
+  right:.2rem;
+  top:4.6rem;
+  color:#ACACAC;
+}
+
+/* --------------- dialog --------------- */
+.mask{
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+  background:black;
+  z-index: 9;
+  position: absolute;
+  top:0;
+  left:0;
+}
+.dialog{
+  position: absolute;
+  z-index: 10;
+  width: 90%;
+  left:5%;
+  top:30%;
+  background:white;
+  box-shadow: #555 0 0 3px;
+}
+.dialog .cont-title{
+  padding: .4rem;
+}
+.dialog .cont-wrapper{
+  padding:1rem;
+}
+.dialog .cont-wrapper .text-content{
+  text-align: center;
+}
+.dialog .buttonpannel{
+  margin-top: 1rem;
+  background: #ff8500;
+}
+.dialog .buttonpannel .btn{
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: .5rem;
+  display: block;
+}
+.dialog .buttonpannel .btn-0{
+  border-right: 1px solid white;
+  width: 50%;
+  float: left;
+}
+.dialog .buttonpannel .btn-1{
+  overflow: hidden;
+}
+
+/* ------------ 弹窗提示 ------------ */
+.popup-alert{
+	width:16.66rem;
+	/*height:8.33rem;*/
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin:-5.83rem 0 0 -10rem;
+	background: rgba(240, 244, 245, .95);
+	box-shadow: 0 0 3px #999;
+	border-radius: 2px;
+	color:rgb(234, 49, 49);
+	padding:1.67rem;
+	z-index: 10;
+}
+.popup-alert p{
+	text-align: center;
+	line-height: 1.83rem;
+	font-size: 1.5rem;
+}
+
+/* -- 错误提示 -- */
+.layout-err-tips{
+	text-align: center;
+	height:2rem;
+	line-height: 2rem;
+	background-color:rgba(234, 49, 49, .7);
+	color:#fff;
+	position: absolute;
+	/*top:0;*/
+	left:0;
+	width:100%;
+	z-index: 10;
+	opacity: 1;
+	transition: opacity 3s ease-out;
+}
+.fade-out{
+	opacity: 0;
+}

@@ -1,0 +1,176 @@
+/* ==================== table style ==================== */
+
+
+/* ------ table style module ------ */
+.manage-list/*, .order-list*/{
+	width:100%;
+	border:0 none;
+}
+.manage-list{
+	border-color:#ccc;
+}
+
+.manage-list td, .manage-list th{
+	line-height: 22px;
+	text-align: center;
+	padding:5px;
+}
+.manage-list tr:nth-child(odd){
+	background: #e6e9f1;
+}
+.manage-list td img/*, .order-list td img*/{
+	width:80px;
+	height:80px;
+	margin-top:5px;
+}
+.manage-list td .em,
+.box-paging a.cur{
+	color:#37C7AD;
+}
+.manage-list td .btn-confirm{
+	padding:0 10px;
+	line-height: 28px;
+	height:28px;
+}
+
+.manage-list .operate{
+	min-width: 170px;
+}
+.manage-list .operate .btn-del,
+.manage-list .operate .btn-edit,
+.manage-list .operate .btn-putaway{
+	display: inline-block;
+	padding:0 8px;
+	margin:0 2px;
+	border-radius: 2px;
+	background: transparent;
+	color:#666;
+	border:2px solid #999;
+}
+.manage-list .operate .btn-del:hover,
+.manage-list .operate .btn-edit:hover,
+.manage-list .operate .btn-putaway:hover{
+	background: #f5f5f5;
+}
+.manage-list .operate .btn-putaway{
+	border:2px solid #37C7AD;
+	color:#37C7AD;
+}
+.manage-list .operate .hide{
+	display: none;
+}
+
+.manage-list .extra-grid td{
+	background: #fff;
+}
+.manage-list .extra-grid .amount{
+	font-size: 18px;
+	font-weight: bold;
+}
+/* ------ table batch button style module ------ */
+
+
+.layout-func{
+	padding:10px 12px 10px 12px;
+}
+	.layout-func .btn-func{
+		width:90px;
+		border-radius: 2px;
+		margin-right:4px;
+	}
+	.layout-func a.link-coupon{
+		border:2px solid #37C7AD;
+		color:#37C7AD;
+		padding:4px;
+		border-radius: 4px;
+		background: #fff;
+		margin-left:10px;
+	}
+	.layout-coupon{
+		line-height: 34px;
+	}
+.table-infor{
+	padding:0 12px;
+	overflow: hidden;
+}
+	.table-infor .table-wrapper{
+		border:1px solid #ccc;
+		overflow: hidden;
+		width:100%;
+		background: #fff;
+	}
+
+
+/* ----------- tab menu  switch ----------- */
+.tablelist-wrapper{
+	position: relative;
+	padding:34px 0 0;
+	margin-top: 10px;
+}
+
+.tablelist-menu{
+	padding:0 12px 0 50px;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.tablelist-menu a{
+	display: inline-block;
+	line-height: 34px;
+	padding: 0 15px;
+	color: #37C7AD;
+}
+.tablelist-menu a.cur{
+	background: #fff;
+	border:1px solid #ccc;
+	border-bottom: 0 none;
+	color:#666;
+}
+.tablelist-cont{
+	padding: 12px 0;
+	background: #fff;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	
+}
+
+/* ----------- pagination style ----------- */
+.box-paging{
+	float: right;
+	border:1px solid #ccc;
+	height:24px;
+	margin:5px 0;
+	overflow: hidden;
+}
+.box-paging span,
+.box-paging a{
+	float: left;
+	padding:0 8px;
+	border-right:1px solid #ccc;
+	line-height: 24px;
+	text-align: center;
+}
+.box-paging span{
+	color:#999;
+}
+.box-paging span input{
+	border:0 none;
+}
+.box-paging a{
+	color:#666;
+}
+.box-paging a.cur,
+.box-paging a.cur:hover{
+	background: #f5f5f5;
+}
+.box-paging a:hover{
+	text-decoration: none;
+	background: #ddd;
+}
+.box-paging .go{
+	border-right: 0 none;
+}
+.box-paging .p{
+	width:20px;
+	text-align: center;
+}

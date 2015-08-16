@@ -1,0 +1,7 @@
+{{if buttons.length==2}}
+	{{each buttons as item,index}}
+	<a data-click-event="{{item.event||'hide'}}" class="btn btn-{{index}}">{{item.text}}</a>
+	{{/each}}
+{{else}}
+<a data-click-event="{{buttons[0].event||'hide'}}" class="btn btn-1">{{buttons[0].text||'确定'}}</a>
+{{/if}}

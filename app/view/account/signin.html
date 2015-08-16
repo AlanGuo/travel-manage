@@ -1,0 +1,38 @@
+<div class="wrapper">
+	<div class="login-box">
+		<div class="login-cont">
+			<div class="title">
+				<div class="layout-err-tips" id="errortips"></div>
+				行坐后台管理
+			</div>
+			<form action="">
+				<!-- 登录 start -->
+				<div class="inpt-account">
+					<input type="text" class="ipt-box" bind-value="postedData.login" placeholder="手机号/邮箱">
+					<input type="password" class="ipt-box" bind-value="postedData.userpassword" placeholder="请输入密码">
+					<p>
+						<input type="text" class="ipt-box" bind-value="postedData.vercode" placeholder="请输入验证码">
+						<span class="box-verify" data-click-event="changevercode">
+							<img bind-attr="src=src" alt="验证码">
+						</span>
+					</p>
+					<a data-click-event="signin" class="btn-login">登录</a>
+					<!-- <a class="forget-pswd" data-click-event="forgetpassword">忘记密码?</a> -->
+				</div>
+				<!-- 登录 end -->
+				<!-- 重置密码 start -->
+				<div class="reset-account hide">
+					<div class="inpt-box">
+						<input type="text" class="ipt-box" placeholder="请输入手机号">
+						
+					</div>
+					<input type="text" class="ipt-box" placeholder="请输入验证码">
+					<input type="text" class="ipt-box" placeholder="请重置密码">
+					<a data-click-event="resetpassword" class="btn-login">完成</a>
+				</div>
+				<!-- 重置密码 end -->
+				
+			</form>
+		</div>
+	</div>
+</div>

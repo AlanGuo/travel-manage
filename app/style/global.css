@@ -1,0 +1,124 @@
+
+/*web site:aladin products management;
+date:2015/2/2
+author:sannielu*/
+
+
+/* common CSS */
+body,h1,h2,h3,h4,h5,h6,p,dl,dt,dd,ul,ol,li,form,button,input,textarea,th,td,select{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 arial;font-family: \5FAE\8F6F\96C5\9ED1;}
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%} 
+cite,em,i{font-style:normal}
+ul,ol{list-style:none}
+a{text-decoration:none}
+a:hover{text-decoration:none;cursor: pointer;}
+fieldset,img{border:0 none;}
+table{border-collapse:collapse;border-spacing:0}
+input::-moz-focus-inner,button::-moz-focus-inner{border:0;padding:0;outline:0}
+iframe {vertical-align: top;}
+*html{zoom:expression(function(ele){ele.style.zoom = "1";document.execCommand("BackgroundImageCache",false,true)}(this))}
+.group,.clear{*zoom:1}
+.group:after,.clear:after{content:'\20';display:block;clear:both;height:0}
+
+.hide{display: none;}
+.show{display: block;}
+
+.left{float: left;}
+.right{float: right;}
+
+.w-100{width:100%;}
+
+.overflow{overflow: hidden;}
+
+
+
+
+/*对话框*/
+.mask{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: #000;opacity: 0.6;z-index: 5;}
+
+html,body,.wrapper-all,.body,.login-wrapper{
+	height: 100%;
+}
+
+.dialog-box{
+	width:490px;
+	height:290px;
+	position: absolute;
+	top:28%;
+	left:50%;
+	margin-left: -245px;
+	border-radius: 4px;
+	border:1px solid #ddd;
+	background-color: #fff;
+	z-index: 6;
+	padding:0 10px 10px;
+}
+	.dialog-box .icon-close{
+		width:30px;
+		height:30px;
+		position: absolute;
+		top:-15px;
+		right:-15px;
+		background-color: #fff;
+		color:#788195;
+		border-radius: 50%;
+		line-height: 30px;
+		font-size:32px;
+	}
+	.dialog-box .title{
+		height:40px;
+		line-height: 40px;
+		border-bottom:1px solid #ddd;
+		text-align: center;
+		font-size: 16px;
+	}
+	.dialog-box .content{
+		width:90%;
+		margin:0 auto;
+	}
+	.dialog-box .content .layer-input{
+		margin:40px auto;
+	}
+	.layer-input .row{
+		margin-bottom: 18px;
+	}
+	.layer-input .hint{
+		margin-left:4px;
+	}
+	.layer-input .att,
+	.layer-input input{
+		height:34px;
+		line-height: 34px;
+	}
+	.layer-input .att{
+		margin-right:4px;
+		text-align: right;
+		width:120px;
+		font-size: 14px;
+	}
+	.layer-input input{
+		border:1px solid #ddd;
+		border-radius: 2px;
+		padding:0 9px;
+		width:160px;
+	}
+
+/* ============= 各种提示 ============= */
+/* ---- err tips ---- */
+.err-mark,
+.check-mark,
+.info-mark{
+	line-height: 34px;
+}
+.err-mark{
+	color:#EF4361;
+}
+/* ---- check mark ---- */
+.check-mark{
+	color:#2BA260;
+}
+.info-mark{
+	color:#999;
+}
+
+

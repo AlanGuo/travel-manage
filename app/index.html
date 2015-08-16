@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="webapp">
+  <meta name="author" content="alan">
+  
+  <title>行坐文化科技</title>
+  
+  <!--for main style-->
+  <!-- build:css({tmp,app}) style/main.css -->
+  <link rel="stylesheet" href="style/global.css">
+  <link rel="stylesheet" href="style/common.css">
+  <link rel="stylesheet" href="style/login.css">
+  <link rel="stylesheet" href="style/region.css">
+  <link rel="stylesheet" href="style/add_new.css">
+  <link rel="stylesheet" href="spm_modules/spaseed/1.1.23/style/common.css">
+  <!-- endbuild -->
+
+  <style type="text/css">
+    /*fonts icos*/
+    @font-face {
+      font-family: 'icomoon';
+      src: url('/font/icomoon.eot?20150630');
+        src: url('/font/icomoon.eot?20150630#iefix') format('embedded-opentype'),
+        url('/font/icomoon.woff?20150630') format('woff'),
+        url('/font/icomoon.ttf?20150630') format('truetype'),
+        url('/font/icomoon.svg?20150630#iconfont') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+    <!-- Add your site or application content here -->
+    <div class="wrapper-all" id="wrapper-all">
+      <!--loading start-->
+      <style type="text/css">
+        /* --------------- loading --------------- */
+        /*load 1*/
+        @keyframes load{
+          0%{background: #ddd;transform:scale(0);}
+          50%{background: #666;transform:scale(1);}
+          100%{background: #ddd;transform:scale(0);}
+        }
+        @-webkit-keyframes load{
+          0%{background: #ddd;-webkit-transform:scale(0);}
+          50%{background: #666;-webkit-transform:scale(1);}
+          100%{background: #ddd;-webkit-transform:scale(0);}
+        }
+        @-moz-keyframes load{
+          0%{background: #ddd;-moz-transform:scale(0);}
+          50%{background: #666;-moz-transform:scale(1);}
+          100%{background: #ddd;-moz-transform:scale(0);}
+        }
+        @-ms-keyframes load{
+          0%{background: #ddd;-ms-transform:scale(0);}
+          50%{background: #666;-ms-transform:scale(1);}
+          100%{background: #ddd;-ms-transform:scale(0);}
+        }
+        /*load 2*/
+        @keyframes loadb{
+          0%{background: #ddd;transform:scale(0);}
+          12%{background: #ddd;transform:scale(0);}
+          62%{background: #666;transform:scale(1);}
+          100%{background: #ddd;transform:scale(0);}
+        }
+        @-webkit-keyframes loadb{
+          0%{background: #ddd;-webkit-transform:scale(0);}
+          12%{background: #ddd;-webkit-transform:scale(0);}
+          62%{background: #666;-webkit-transform:scale(1);}
+          100%{background: #ddd;-webkit-transform:scale(0);}
+        }
+        @-moz-keyframes loadb{
+          0%{background: #ddd;-moz-transform:scale(0);}
+          12%{background: #ddd;-moz-transform:scale(0);}
+          62%{background: #666;-moz-transform:scale(1);}
+          100%{background: #ddd;-moz-transform:scale(0);}
+        }
+        @-ms-keyframes loadb{
+          0%{background: #ddd;-ms-transform:scale(0);}
+          12%{background: #ddd;-ms-transform:scale(0);}
+          62%{background: #666;-ms-transform:scale(1);}
+          100%{background: #ddd;-ms-transform:scale(0);}
+        }
+
+        /*load 3*/
+        @keyframes loadc{
+          0%{background: #ddd;transform:scale(0);}
+          25%{background: #ddd;transform:scale(0);}
+          75%{background: #666;transform:scale(1);}
+          100%{background: #ddd;transform:scale(0);}
+        }
+        @-webkit-keyframes loadc{
+          0%{background: #ddd;-webkit-transform:scale(0);}
+          25%{background: #ddd;-webkit-transform:scale(0);}
+          75%{background: #666;-webkit-transform:scale(1);}
+          100%{background: #ddd;-webkit-transform:scale(0);}
+        }
+        @-moz-keyframes loadc{
+          0%{background: #ddd;-moz-transform:scale(0);}
+          25%{background: #ddd;-moz-transform:scale(0);}
+          75%{background: #666;-moz-transform:scale(1);}
+          100%{background: #ddd;-moz-transform:scale(0);}
+        }
+        @-ms-keyframes loadc{
+          0%{background: #ddd;-ms-transform:scale(0);}
+          25%{background: #ddd;-ms-transform:scale(0);}
+          75%{background: #666;-ms-transform:scale(1);}
+          100%{background: #ddd;-ms-transform:scale(0);}
+        }
+
+        /*load 4*/
+        @keyframes loadd{
+          0%{background: #ddd;transform:scale(0);}
+          37%{background: #ddd;transform:scale(0);}
+          87%{background: #666;transform:scale(1);}
+          100%{background: #ddd;transform:scale(0);}
+        }
+        @-webkit-keyframes loadd{
+          0%{background: #ddd;-webkit-transform:scale(0);}
+          37%{background: #ddd;-webkit-transform:scale(0);}
+          87%{background: #666;-webkit-transform:scale(1);}
+          100%{background: #ddd;-webkit-transform:scale(0);}
+        }
+        @-moz-keyframes loadd{
+          0%{background: #ddd;-moz-transform:scale(0);}
+          37%{background: #ddd;-moz-transform:scale(0);}
+          87%{background: #666;-moz-transform:scale(1);}
+          100%{background: #ddd;-moz-transform:scale(0);}
+        }
+        @-ms-keyframes loadd{
+          0%{background: #ddd;-ms-transform:scale(0);}
+          37%{background: #ddd;-ms-transform:scale(0);}
+          87%{background: #666;-ms-transform:scale(1);}
+          100%{background: #ddd;-ms-transform:scale(0);}
+        }
+        .wrap-loading .load-1{animation:load 1s ease infinite;-webkit-animation:load 1s ease infinite;-moz-animation:load 1s ease infinite;-ms-animation:load 1s ease infinite;}
+        .wrap-loading .load-2{animation:loadb 1s ease infinite;-webkit-animation:loadb 1s ease infinite;-moz-animation:loadb 1s ease infinite;-ms-animation:loadb 1s ease infinite;}
+
+        .wrap-loading .load-3{animation:loadc 1s ease infinite;-webkit-animation:loadc 1s ease infinite;-moz-animation:loadc 1s ease infinite;-ms-animation:loadc 1s ease infinite;}
+
+        .wrap-loading .load-4{animation:loadd 1s ease infinite;-webkit-animation:loadd 1s ease infinite;-moz-animation:loadd 1s ease infinite;-ms-animation:loadd 1s ease infinite;}
+        .wrap-loading{padding:2rem 0 2rem 0;text-align: center;}
+        .wrap-loading span{display: inline-block;width:.83rem;height:.83rem;border-radius: 50%;}
+      </style>
+      <div class="wrap-loading" id="page-loader" style="margin-top:30%;">
+        <p>
+          <span class="load-1"></span>
+          <span class="load-2"></span>
+          <span class="load-3"></span>
+          <span class="load-4"></span>
+        </p>
+      </div>
+      <!--loading end-->
+      <div class="header">
+      </div>
+
+      <div class="body">
+        <div id="body-container">
+        </div>
+      </div>
+    </div>
+   
+    <!-- build:js({tmp,app}) script/vendors.js -->
+    
+    
+    
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!--主程序脚本-->
+    
+    
+    
+
+    <!--{{localstorage-remove-start}}-->
+    <!-- build:js(.) script/sea.js -->
+    <script type="text/javascript" src="spm_modules/seajs/2.3.0/dist/sea.js"></script>
+    <!-- endbuild -->
+
+
+    
+    <!--{{combo}}-->
+    
+    <!--{{localstorage-remove-end}}-->
+
+    <script type="text/javascript">
+      /*{{localstorage-onload-start}}*/
+      if(window.seajs){
+        
+          seajs.config({
+            base:'/',
+            alias: {
+                //spaseed
+                '$':'spm_modules/spaseed/1.1.23/lib/dom',
+                'mp':'spm_modules/spaseed/1.1.23/main/mp',
+                'App':'spm_modules/spaseed/1.1.23/main/App',
+                'Router':'spm_modules/spaseed/1.1.23/main/Router',
+                'AppRouter':'spm_modules/spaseed/1.1.23/main/HashRouter',
+                'Node':'spm_modules/spaseed/1.1.23/main/Node',
+                'View':'spm_modules/spaseed/1.1.23/main/View',
+                'Event':'spm_modules/spaseed/1.1.23/lib/Event',
+                'Net':'spm_modules/spaseed/1.1.23/lib/Net',
+                'SideBarView': 'spm_modules/spaseed/1.1.23/main/SideBarView',
+                'CustomSideBarView':'app/script/module/CustomSideBarView',
+                'MenuView': 'spm_modules/spaseed/1.1.23/main/MenuView',
+                
+                'Dialog':'spm_modules/spaseed/1.1.23/lib/Dialog',
+
+
+                'Mask':'spm_modules/spaseed/1.1.23/lib/Mask',
+                'ErrorTips':'spm_modules/spaseed/1.1.23/lib/ErrorTips',
+                'Loading':'spm_modules/spaseed/1.1.23/lib/Loading',
+
+                'binder':'spm_modules/spaseed/1.1.23/lib/binder',
+                'cookie':'spm_modules/spaseed/1.1.23/lib/cookie',
+                'formatcheck':'spm_modules/spaseed/1.1.23/lib/formatcheck',
+                'env':'spm_modules/spaseed/1.1.23/lib/env',
+                'asyncrequest':'spm_modules/spaseed/1.1.23/lib/asyncrequest',
+                'stats':'spm_modules/spaseed/1.1.23/lib/stats',
+                'template':'spm_modules/spaseed/1.1.23/lib/template',
+
+                'config':'spm_modules/spaseed/1.1.23/config',
+                
+                'apptemplate':'tmp/view/compiled/view',
+                'request':'app/script/model/request',
+            }
+          });
+          seajs.use('app/script/startup.js',function(startup){
+            document.getElementById('page-loader').parentNode.removeChild(document.getElementById('page-loader'));
+            if(startup){
+              startup();
+            }
+          });
+        
+      }
+      /*{{localstorage-onload-end}}*/
+      /*{{localstorage}}*/
+    </script>
+    
+    
+    
+
+    
+</body>
+</html>

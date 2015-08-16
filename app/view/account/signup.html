@@ -1,0 +1,29 @@
+<div class="wrapper">
+	<div class="login-box">
+		<div class="login-cont">
+			<div class="title">
+				<span class="icon-logo"></span>
+				<div class="layout-err-tips" id="errortips"></div>
+				webuy商品后台管理
+			</div>
+			<form action="">
+				<!-- 注册 start -->
+				<div class="inpt-account">
+					<input type="text" class="ipt-box" bind-value="postedData.useremail" placeholder="请输入邮箱">
+					<input type="text" class="ipt-box" bind-value="postedData.usermobile" placeholder="请输入手机号">
+					<input type="password" class="ipt-box" bind-value="postedData.userpassword" placeholder="请输入密码">
+					<input type="password" class="ipt-box" bind-value="postedData.repeatpassword" placeholder="请再次输入密码">
+					<p>
+						<input type="text" class="ipt-box" bind-value="postedData.vercode" placeholder="请输入验证码">
+						<span class="box-verify">
+							<img bind-attr="src=src" data-click-event="changevercode" alt="验证码">
+						</span>
+					</p>
+					<a data-click-event="signup" class="btn-login">注册</a>
+					<a class="forget-pswd" data-href="/account/signin" data-click-event="router">登录</a>
+				</div>
+				<!-- 注册 end -->
+			</form>
+		</div>
+	</div>
+</div>

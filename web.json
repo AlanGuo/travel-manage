@@ -1,0 +1,20 @@
+{
+  "handler":{
+      "prefix":"/cgi-bin",
+      "module":"backend/requesthandler"
+  },
+  "port":8080,
+  "expires":[{
+    "fileMatch": ".gif|png|jpg|jpeg|js|css|mp3|ogg",
+    "maxAge": 606024365
+  }],
+  "log":"web.log",
+  "index":"index.html",
+  "singlePage": true,
+  "webSocket":{
+    "handle":{
+        "prefix":"websocket"
+    },
+    "sub-protocol":["echo-protocol-pc","echo-protocol-mobile"]
+  }
+}

@@ -1,0 +1,239 @@
+<div class="main-cont">
+	<!-- title start -->
+	<div class="layout-title">
+		
+		<div class="crumb-nav">
+			<a data-click-event="router" data-href="/">首页</a>
+			<span class="arrow-right">></span>
+			<a data-click-event="router" data-href="/product/manage">商品管理</a>
+			<span class="arrow-right">></span>
+			<span>新建商品</span>
+		</div>
+
+		<h2 class="topic">新建商品</h2>
+
+	</div>
+	<!-- title end -->
+
+	<!-- content start -->
+	<div class="layout-cont">
+		<div class="box-infor">
+			<div class="layout-err-tips" id="errortips"></div>
+			<form action="javascript:;">
+
+				<div class="row-inpt">
+					<div class="att">商品编号：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.serial">
+					</div>
+					<div class="hint left">
+						<p class="check-mark hide">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark">
+							<i class="icon-err"></i>
+							请输入商品编号
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">商品标题：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.name">
+					</div>
+					<div class="hint left">
+						<p class="check-mark hide">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark">
+							<i class="icon-err"></i>
+							请输入商品标题
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">商品分类：</div>
+					<div class="ctt left">
+						<select name="" bind-value="formdata.type">
+							<option value="0">请选择分类</option>
+							<option value="1">拼布</option>
+						</select>
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入商品分类
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">零售价格：</div>
+					<div class="ctt left">
+						<input type="tel" class="inprice" bind-value="formdata.price"> 元
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入商品的零售价格
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">上架时长：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.timeleft"> 天
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入上架时长
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">库存数量：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.count"> 件
+					</div>
+					<div class="hint left">
+						<p class="check-mark hide">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark">
+							<i class="icon-err"></i>
+							请输入库存数量
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att left" bind-value="formdata.detail">
+						物品详情：
+						<span>(多图)</span>
+					</div>
+					<div class="ctt left">
+						<div class="box-detail">
+						</div>
+					</div>
+					<div class="hint left">
+						<p class="info-mark">
+							<i class="icon-info"></i>
+							此内容为商品的图文详情
+						</p>
+					</div>
+				</div>
+				<div class="row-inpt">
+					<div class="att left">
+						首页banner图：
+						<span>(单图)</span>
+					</div>
+					<div class="ctt">
+						<div class="show-window">
+							<!-- 缩略图展示 start 此处只显示一张图，用hide 来切换 -->
+							<div class="thumb-pic hide" bind-attr="class={bannerSelected}?'thumb-pic':'thumb-pic hide'">
+								<img src="image/testlogo.jpg" bind-attr="src=bannerData" alt="封面">
+								<a href="#nolink" class="close">
+									<span class="icon-x"></span>
+								</a>
+							</div>
+							<!-- 缩略图展示 end -->
+							<input type="file" data-change-event="bannerChange" bind-file="formdata.bannerFiles" style="display:none" accept="image/*" id="banner-file-choose">
+							<a data-click-event="uploadBanner" bind-attr="class={bannerSelected}?'add-pic hide':'add-pic'">
+								<span class="icon-add"></span>
+							</a>
+						</div>
+						<!-- 提示 start -->
+						<div class="hint">
+							<p class="info-mark">
+								<i class="icon-info"></i>
+								图片尺寸463px＊230px
+							</p>
+						</div>
+						<!-- 提示 end -->
+					</div>	
+					
+				</div>
+				<div class="row-inpt">
+					<div class="att left">
+						物品封面：
+						<span>(单图)</span>
+					</div>
+					<div class="ctt">
+						<div class="show-window">
+							<!-- 缩略图展示 start 此处只显示一张图，用hide 来切换 -->
+							<div class="thumb-pic hide" bind-attr="class={coverSelected}?'thumb-pic':'thumb-pic hide'">
+								<img src="image/testlogo.jpg" bind-attr="src=coverData" alt="封面">
+								<a href="#nolink" class="close">
+									<span class="icon-x"></span>
+								</a>
+							</div>
+							<!-- 缩略图展示 end -->
+							<input type="file" data-change-event="coverChange" bind-file="formdata.coverFiles" style="display:none" accept="image/*" id="cover-file-choose">
+							<a data-click-event="uploadCover" bind-attr="class={coverSelected}?'add-pic hide':'add-pic'">
+								<span class="icon-add"></span>
+							</a>
+						</div>
+						<!-- 提示 start -->
+						<div class="hint">
+							<p class="info-mark">
+								<i class="icon-info"></i>
+								图片尺寸500px＊500px
+							</p>
+						</div>
+						<!-- 提示 end -->
+					</div>	
+				</div>
+				<!-- <div class="row-inpt">
+					<div class="att left">
+						物品封面：
+						<span>(多图)</span>
+					</div>
+					<div class="ctt">
+						<div class="show-window"> -->
+
+							<!-- 缩略图展示 start 
+							<div class="thumb-pic">
+								<img src="img/testlogo.jpg" alt="">
+								<a href="#nolink" class="close">
+									<span class="icon-x"></span>
+								</a>
+							</div>
+							缩略图展示 end -->
+
+				<!-- 			<a href="#nolink" class="add-pic">
+								<span class="icon-add"></span>
+							</a>
+
+						</div>
+					</div>	
+				</div> -->
+
+				<div class="row-inpt">
+					<div class="att">&nbsp;</div>
+					<div class="ctt">
+						<a href="javascript:;" class="btn-confirm" data-click-event="save">保存</a>
+						<a href="javascript:;" class="btn-confirm" data-click-event="saveAndPublish">保存并上架</a>
+						<!-- <a href="javascript:;" class="btn-confirm" data-click-event="preview">预览</a> -->
+					</div>
+				</div>
+
+			</form>
+		</div>	
+	</div>
+	<!-- content end -->
+
+</div>
