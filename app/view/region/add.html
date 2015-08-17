@@ -1,0 +1,125 @@
+<div class="main-cont">
+	<!-- title start -->
+	<div class="layout-title">
+		
+		<div class="crumb-nav">
+			<a href="/#/index">首页</a>
+			<span class="arrow-right">></span>
+			<a href="/#/region/manage">景区管理</a>
+			<span class="arrow-right">></span>
+			<span>新建景区</span>
+		</div>
+
+		<h2 class="topic">新建景区</h2>
+
+	</div>
+	<!-- title end -->
+	<div class="layout-err-tips" id="errortips"></div>
+	<!-- content start -->
+	<div class="layout-cont">
+		<div class="box-infor">
+			<form action="javascript:;">
+				<div class="row-inpt">
+					<div class="att">景区名：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.name">
+					</div>
+					<div class="hint left">
+						<p class="check-mark hide">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入景区名
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">地域：</div>
+					<div class="ctt left">
+						<select id="province-select" bind-value="formdata.provinceId">
+							<option value="0">请选择地域</option>
+						</select>
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请选择地域
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">经度：</div>
+					<div class="ctt left">
+						<input type="tel" class="inprice" bind-value="formdata.longitude">
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入经度
+						</p>
+					</div>
+				</div>
+
+				<div class="row-inpt">
+					<div class="att">纬度：</div>
+					<div class="ctt left">
+						<input type="text" bind-value="formdata.latitude"> 
+					</div>
+					<div class="hint left">
+						<p class="check-mark">
+							<i class="icon-checkmark"></i>
+						</p>
+						<p class="err-mark hide">
+							<i class="icon-err"></i>
+							请输入纬度
+						</p>
+					</div>
+				</div>
+
+				<!-- <div class="row-inpt">
+					<div class="att left">
+						物品封面：
+						<span>(多图)</span>
+					</div>
+					<div class="ctt">
+						<div class="show-window"> -->
+
+							<!-- 缩略图展示 start 
+							<div class="thumb-pic">
+								<img src="img/testlogo.jpg" alt="">
+								<a href="#nolink" class="close">
+									<span class="icon-x"></span>
+								</a>
+							</div>
+							缩略图展示 end -->
+
+				<!-- 			<a href="#nolink" class="add-pic">
+								<span class="icon-add"></span>
+							</a>
+
+						</div>
+					</div>	
+				</div> -->
+
+				<div class="row-inpt">
+					<div class="att">&nbsp;</div>
+					<div class="ctt">
+						<a class="btn-confirm" data-click-event="save" bind-attr="data-id=formdata.id">保存</a>
+					</div>
+				</div>
+
+			</form>
+		</div>	
+	</div>
+	<!-- content end -->
+
+</div>

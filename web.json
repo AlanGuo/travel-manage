@@ -16,5 +16,6 @@
         "prefix":"websocket"
     },
     "sub-protocol":["echo-protocol-pc","echo-protocol-mobile"]
-  }
+  },
+  "audioPath":"../travelAudio/"
 }

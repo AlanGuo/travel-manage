@@ -119,7 +119,6 @@ var admin = {
 	},
 	checklogin:function(request){
 		var cookie = request.headers.cookie;
-		console.log(cookie);
 		console.log(users);
 		return users.filter(function(item){
 			if(cookie.indexOf(item.uin)>-1 && 

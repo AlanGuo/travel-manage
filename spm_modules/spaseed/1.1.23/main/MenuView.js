@@ -15,6 +15,7 @@ var MenuView = View.extend({
 			'select':function(target){
 				this.$elem.find(this.data.itemtype || 'li').removeClass('active');
 				$(target).addClass('active');
+				return true;
 			}
 		}
 	}

@@ -594,6 +594,15 @@ module.exports = function (grunt) {
 
     
     tmod: {
+      spaseedtemplate: {
+        src: ['spm_modules/spaseed/1.1.23/view/**/*.html'],
+        dest: 'tmp/spaseed/view/view.js',
+        options: {
+            base: 'spm_modules/spaseed/1.1.23/view',
+            minify: false,
+            namespace:'spaseedtemplate'
+        }
+      },
       template: {
         src: 'tmp/view/**/*.html',
         dest: 'tmp/view/compiled/view.js',

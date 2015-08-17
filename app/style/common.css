@@ -1,7 +1,7 @@
 body{background: #eee;}
 
 .side-nav .list-group li > a:hover,
-.side-nav li.cur,
+.side-nav li.active,
 .side-nav li.open > a > .icon-right,
 .deal-list .icon-right{
 	-webkit-transition:all .5s ease;
@@ -231,14 +231,14 @@ body{background: #eee;}
 
 /*unfold*/
 	
-	.side-nav ul > li.cur{
+	.side-nav ul > li.active{
 		background: #21252d;
 		border-left: 2px solid #37C7AD;
 	}
 
-	.side-nav li.cur > a, 
-	.side-nav li.cur > a > .icon-right,
-	.side-nav li.cur > a > .ico{
+	.side-nav li.active > a, 
+	.side-nav li.active > a > .icon-right,
+	.side-nav li.active > a > .ico{
 		color:#fff;
 	}
 	.side-nav ul > li .submenu{

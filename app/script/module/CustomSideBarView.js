@@ -1,28 +1,26 @@
 'use strict';
 
-define(function(require, exports, module){
-	var $ = require('$'),
-		cookie = require('cookie'),
-		SideBarView = require('SideBarView');
-	
-	var CustomSideBarView = SideBarView.extend({
-		$elem:$('#wrapper-all'),
-		/*其他控制元素*/
-		elements:{},
+var $ = require('$'),
+	cookie = require('cookie'),
+	SideBarView = require('SideBarView');
 
-		ctor:function(data){
-			var uin = cookie.get('uin'),
-				skey = cookie.get('skey');
+var CustomSideBarView = SideBarView.extend({
+	$elem:$('#wrapper-all'),
+	/*其他控制元素*/
+	elements:{},
 
-			if(uin && skey){
-				data.sidebarData = {user:uin};
-			}
-			else{
-				location.href = '/#/account/signin';
-			}
-			this.$super(data);
+	ctor:function(data){
+		var uin = cookie.get('uin'),
+			skey = cookie.get('skey');
+
+		if(uin && skey){
+			data.sidebarData = {user:uin};
 		}
-	});
-
-	module.exports = CustomSideBarView;
+		else{
+			location.href = '/#/account/signin';
+		}
+		this.$super(data);
+	}
 });
+
+module.exports = CustomSideBarView;

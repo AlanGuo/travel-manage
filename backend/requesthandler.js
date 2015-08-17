@@ -1,10 +1,12 @@
 var connection = require('./connection'),
 	admin = require('./admin'),
 	security = require('./security'),
-	product = require('./product');
+	region = require('./region'),
+	province = require('./province');
 
 connection.init();
 
 exports.admin = admin;
 exports.security = security;
-exports.product = product;
+exports.region = region;
+exports.province = province;
