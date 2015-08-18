@@ -10,10 +10,19 @@ var request = {
 		method:'post'
 	},
 	getAudio:{
-		url:'/cgi-bin/audio/get'
+		url:'/cgi-bin/audio/get',
+		method:'get'
+	},
+	deleteAudio:{
+		url:'/cgi-bin/audio/delete'
 	},
 	addAudio:{
 		url:'/cgi-bin/audio/add',
+		method:'post',
+		contentType:false
+	},
+	updateAudio:{
+		url:'/cgi-bin/audio/update',
 		method:'post',
 		contentType:false
 	},
@@ -29,8 +38,8 @@ var request = {
 		url:'/cgi-bin/region/add',
 		method:'post'
 	},
-	modifyRegion:{
-		url:'/cgi-bin/region/modify',
+	updateRegion:{
+		url:'/cgi-bin/region/update',
 		method:'post'
 	},
 	deleteRegion:{

@@ -7,10 +7,10 @@ var $ = require('$'),
 var RegionAddSuccessPageView = CustomSideBarView.extend({
 
     render: function () {
-        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
+        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'audio'});
         this.renderContent({
             sidebar:sidebar,
-            container:template('region/addsuccess',{action:'更新'})
+            container:template('audio/addsuccess',{action:'新增'})
         });
     },
 

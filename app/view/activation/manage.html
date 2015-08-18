@@ -1,0 +1,114 @@
+<div class="main-cont">
+	<!-- title start -->
+	<div class="layout-title">
+		
+		<div class="crumb-nav">
+			<a href="/#/index">首页</a>
+			<span class="arrow-right">></span>
+			<span>激活管理</span>
+		</div>
+
+		<h2 class="topic">激活管理</h2>
+
+	</div>
+	<!-- title end -->
+
+	<!-- content start -->
+	<div class="layout-cont">
+		<div class="layout-func">
+			<a href="javascript:;" data-click-event="addAudio" class="btn-func">新增语音</a>
+			<div style="margin-top:1rem;">
+				<select id="province-select" data-change-event="province">
+					<option>请选择地域</option>
+				</select>
+				<select id="region-select" data-change-event="region">
+					<option>请选择景区</option>
+				</select>
+			</div>			
+		</div>
+
+		<div class="tablelist-wrapper">
+
+			<div class="tablelist-cont">
+
+					<!-- table start -->
+					<div class="table-infor">
+					
+					<div class="table-wrapper">
+					<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+						<tbody id="tbody">
+							<tr>
+								<!-- <th>
+									<input type="checkbox">
+								</th> -->
+								<th>
+									语音
+								</th>
+								<th>
+									经度
+								</th>
+								<th>
+									纬度
+								</th>
+								<th>
+									大小
+								</th>
+								<th>
+									上次操作时间
+								</th>
+								<th style="width:18%;">
+									操作
+								</th>
+							</tr>
+							<tr bind-repeat="gridData" style="display:none">
+								<!-- <td>
+									<input type="checkbox">
+								</td> -->
+								<!-- <td bind-content="$item.id"></td> -->
+								<td bind-content="$item.name"></td>
+								<td bind-content="$item.longitude"></td>
+								<td bind-content="$item.latitude"></td>
+								<td bind-content="$item.size"></td>
+								<td bind-content="$item.lastmodifytime"></td>
+								<td>
+									<div class="operate">
+										<a href="javascript:;" data-click-event="delete" bind-attr="data-id=$item.id" class="btn-del">删除</a>
+										<a href="javascript:;" data-click-event="modify" bind-attr="data-id=$item.id" class="btn-edit">编辑</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					<!-- 分页 start -->
+					<!-- <div class="box-paging clear">
+						<span class="prev">上一页</span>
+						<a class="prev hide" href="#nolink">上一页</a>
+						<a class="cur" href="#nolink">1</a>
+						<a href="#nolink">2</a>
+						<a href="#nolink">3</a>
+						<a href="#nolink">4</a>
+						<a href="#nolink">5</a>
+						<span>...</span>
+						<a href="#nolink" class="next">下一页</a>
+						<span>
+							共100页，
+							跳至
+							<input class="p" type="text">
+							页
+						</span>
+						<a class="go" href="#nolink">确定</a>
+					</div> -->
+					<!-- 分页 end -->
+				</div>
+				<!-- table end -->
+			</div>
+
+			<!-- table menu start -->
+			<!-- table menu end -->
+			<div class="layout-func">
+				<a href="javascript:;" data-click-event="addAudio" class="btn-func">新增语音</a>				
+			</div>
+		</div>
+	</div>
+	<!-- content end -->

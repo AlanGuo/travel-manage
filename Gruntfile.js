@@ -149,8 +149,8 @@ module.exports = function (grunt) {
       },
       
       view:{
-        files: ['<%= yeoman.app %>/view/**/*.html'],
-        tasks: ['cdnify:view','newer:tmod'],
+        files: ['<%= yeoman.app %>/view/**/*.html','spm_modules/spaseed/1.1.23/view/**/*.html'],
+        tasks: ['cdnify:view','tmod'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }

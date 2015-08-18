@@ -37,6 +37,9 @@ var region ={
 					if(query.id){
 						sql = mysql.format('select * from traveldb.scenicRegion where id=?',[query.id]);
 					}
+					else if(query.provinceId){
+						sql = mysql.format('select * from traveldb.scenicRegion where provinceId=?',[query.provinceId]);
+					}
 					else{
 						var comlumns = [
 							'traveldb.scenicRegion.id',
@@ -143,7 +146,7 @@ var region ={
 			});
 		}
 	},
-	'modify':function(pathname, request, response, config){
+	'update':function(pathname, request, response, config){
 		if(!admin.checklogin(request)){
 			util.jsonRespond(response,{
 				code:403,

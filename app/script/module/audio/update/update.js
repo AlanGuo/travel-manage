@@ -9,43 +9,41 @@ var $ = require('$'),
     ErrorTips = require('ErrorTips'),
     CustomSideBarView = require('CustomSideBarView');
 
-var RegionUpdatePageView = CustomSideBarView.extend({
+var AudioUpdatePageView = CustomSideBarView.extend({
 
     render: function () {
         var self = this;
         this.params = querystring.parse();
     	this.data = {
-            coverSelected:false,
-            coverData:'',
-            bannerData:'',
-            bannerSelected:false,
+            audioSelected:true,
+            audioData:'',
             formdata:{
-            	id:this.params.id,
+                id:this.params.id,
                 name:'',
                 provinceId:0,
                 latitude:'',
-                longitude:''
+                longitude:'',
+                file:'',
+                audioFiles:[]
             }
         };
-        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
+        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'audio'});
         this.renderContent({
             sidebar:sidebar,
-            container:template('region/add')
+            container:template('audio/add')
         });
 
         asyncRequest.all(this.$net,[{
-            request:request.getRegion,
+            request:request.getAudio,
             params:{id:this.params.id}
         },{
         	request:request.province
         }],
         function(data){
             //self.data.formdata = data[0][0];
-            self.data.formdata.name = data[0][0].name;
-            self.data.formdata.provinceId = data[0][0].provinceId;
-            self.data.formdata.latitude = data[0][0].latitude;
-            self.data.formdata.longitude = data[0][0].longitude;
-            $('#province-select').html(template('provincelist',{provincelist:data[1]}));
+            for(var p in data[0][0]){
+                self.data.formdata[p] = data[0][0][p];
+            }
         });
 
         this.$errorTips = ErrorTips.create({$elem:$('#errortips')});
@@ -55,13 +53,24 @@ var RegionUpdatePageView = CustomSideBarView.extend({
     prepare:function(){
         //这里检查输入的合法性
         var self = this;
+        var formdata = new FormData();
+        for(var p in this.data.formdata){
+            if(/files/i.test(p)){
+                if(this.data.formdata[p].length){
+                    formdata.append(p,this.data.formdata[p][0]);
+                }
+            }
+            else{
+                formdata.append(p,this.data.formdata[p]);
+            }
+        }
         //更新数据
         this.$net.request({
-            request:request.updateRegion,
-            data:this.data.formdata,
+            request:request.updateAudio,
+            data:formdata,
             success:function(result){
                 if(!result.code){
-                    location.href = '/#/region/updatesuccess';
+                    location.href = '/#/audio/updatesuccess';
                 }
             },
             error:function(msg){
@@ -75,6 +84,14 @@ var RegionUpdatePageView = CustomSideBarView.extend({
             'save':function(){
                 this.prepare();
             },
+            'uploadAudio':function(){
+                $('#audio-file-choose').click();
+            }
+        },
+        'change':{
+            'audioChange':function(){
+                this.data.formdata.file = '已选择';
+            }
         }
     },
 
@@ -84,4 +101,4 @@ var RegionUpdatePageView = CustomSideBarView.extend({
     }
 });
     
-module.exports = RegionUpdatePageView;
+module.exports = AudioUpdatePageView;

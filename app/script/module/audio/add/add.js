@@ -4,40 +4,28 @@ var $ = require('$'),
     template = require('template'),
     request = require('request'),
     binder = require('binder'),
+    querystring = require('querystring'),
     ErrorTips = require('ErrorTips'),
     CustomSideBarView = require('CustomSideBarView');
 
-var RegionAddPageView = CustomSideBarView.extend({
+var AudioAddPageView = CustomSideBarView.extend({
 
     render: function () {
-        var self = this;
     	this.data = {
-            coverSelected:false,
-            coverData:'',
-            bannerData:'',
-            bannerSelected:false,
+            audioSelected:false,
+            audioData:'',
             formdata:{
                 name:'',
                 provinceId:0,
                 latitude:'',
-                longitude:''
+                longitude:'',
+                audioFiles:[]
             }
         };
-        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
+        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'audio'});
         this.renderContent({
             sidebar:sidebar,
-            container:template('region/add')
-        });
-
-        //拉取地域
-        this.$net.request({
-            request:request.province,
-            success:function(data){
-                $('#province-select').html(template('provincelist',{provincelist:data}));
-            },
-            error:function(msg){
-                self.$errorTips.show(msg);
-            }
+            container:template('audio/add')
         });
 
         this.$errorTips = ErrorTips.create({$elem:$('#errortips')});
@@ -47,13 +35,25 @@ var RegionAddPageView = CustomSideBarView.extend({
     prepare:function(){
         //这里检查输入的合法性
         var self = this;
+        var formdata = new FormData();
+        for(var p in this.data.formdata){
+            if(/files/i.test(p)){
+                if(this.data.formdata[p].length){
+                    formdata.append(p,this.data.formdata[p][0]);
+                }
+            }
+            else{
+                formdata.append(p,this.data.formdata[p]);
+            }
+        }
+        formdata.append('regionId',querystring.parse().regionId);
         //更新数据
         this.$net.request({
-            request:request.addRegion,
-            data:this.data.formdata,
+            request:request.addAudio,
+            data:formdata,
             success:function(result){
                 if(!result.code){
-                    location.href = '/#/region/addsuccess';
+                    location.href = '/#/audio/addsuccess';
                 }
             },
             error:function(msg){
@@ -67,6 +67,14 @@ var RegionAddPageView = CustomSideBarView.extend({
             'save':function(){
                 this.prepare();
             },
+            'uploadAudio':function(){
+                $('#audio-file-choose').click();
+            }
+        },
+        'change':{
+            'audioChange':function(){
+                this.data.audioSelected = true;
+            }
         }
     },
 
@@ -76,4 +84,4 @@ var RegionAddPageView = CustomSideBarView.extend({
     }
 });
     
-module.exports = RegionAddPageView;
+module.exports = AudioAddPageView;

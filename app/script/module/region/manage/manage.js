@@ -10,7 +10,7 @@ var $ = require('$'),
 
 var RegionManagePageView = CustomSideBarView.extend({
 
-    pageSize: 10,
+    pageSize: 10000,
 
     title:'景区管理',
 
@@ -18,7 +18,7 @@ var RegionManagePageView = CustomSideBarView.extend({
     	this.data = {
             gridData:[]
         };
-        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'manage'});
+        var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
         this.renderContent({
             sidebar:sidebar,
             container:template('region/manage')
@@ -29,7 +29,7 @@ var RegionManagePageView = CustomSideBarView.extend({
         this.$dialog = Dialog.create({$app:this.$app,$parent:this.$elem});
     },
 
-    loadGrid:function(onthecourt,expired, begin){
+    loadGrid:function(begin){
         var self = this;
         asyncRequest.all(this.$net,[{
             request:request.getRegion,
@@ -80,6 +80,7 @@ var RegionManagePageView = CustomSideBarView.extend({
     },
 
     destroy:function(){
+        this.$super();
         this.binderObject.unobserve();
     }
 });
