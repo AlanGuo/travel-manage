@@ -20,6 +20,17 @@ var CustomSideBarView = SideBarView.extend({
 			location.href = '/#/account/signin';
 		}
 		this.$super(data);
+
+		this.$event.on(this,'click','signout',function(){
+			cookie['delete']('uin');
+            cookie['delete']('skey');
+
+            location.href = '/#/account/signin';
+		});
+
+		this.__sideBarHandler = {};
+		//绑定click事件
+		this.__sideBarHandler.click = this.$event.bindEvent(this, this.$elem, 'click');
 	}
 });
 

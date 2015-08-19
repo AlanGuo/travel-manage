@@ -26,7 +26,7 @@ var RegionAddPageView = CustomSideBarView.extend({
         var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
         this.renderContent({
             sidebar:sidebar,
-            container:template('region/add')
+            container:template('region/add',{active:'新建'})
         });
 
         //拉取地域

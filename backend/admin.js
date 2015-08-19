@@ -50,21 +50,22 @@ var admin = {
 												]
 											});
 
-											var user = users.filter(function(item){
-												if(item.uin === postData.login){
-													return item;
+											var has = false;
+											users.forEach(function(item){
+												if(item.uin == postData.login){
+													has = true;
+													item.skey = skey;
 												}
 											});
-											if(user && user.length){
-												user.skey = skey;
-											}
-											else{
+											if(!has){
 												users.push({
 													uin:postData.login,
 													skey:skey,
 													loginTime:nowDate
 												});
 											}
+
+											console.log(users);
 										}
 										else{
 											util.jsonRespond(response,{
@@ -120,6 +121,7 @@ var admin = {
 	checklogin:function(request){
 		var cookie = request.headers.cookie;
 		console.log(users);
+		console.log(cookie);
 		return users.filter(function(item){
 			if(cookie.indexOf(item.uin)>-1 && 
 				cookie.indexOf(item.skey)>-1){

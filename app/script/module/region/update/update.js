@@ -30,7 +30,7 @@ var RegionUpdatePageView = CustomSideBarView.extend({
         var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'region'});
         this.renderContent({
             sidebar:sidebar,
-            container:template('region/add')
+            container:template('region/add',{active:'更新'})
         });
 
         asyncRequest.all(this.$net,[{
