@@ -14,7 +14,7 @@ var startup = function(container){
 		netback:function(options,ret){
 			if(ret.code === 403){
 				//跳转到登录
-				app.$router.loadUrl('/#/account/signin');
+				app.$router.loadUrl('/account/signin');
 			}
 		}
 	}));

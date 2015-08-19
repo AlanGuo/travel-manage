@@ -9,6 +9,10 @@ var request = {
 		url:'/cgi-bin/admin/signup',
 		method:'post'
 	},
+	getPayment:{
+		url:'/cgi-bin/payment/get',
+		method:'get'
+	},
 	getAudio:{
 		url:'/cgi-bin/audio/get',
 		method:'get'

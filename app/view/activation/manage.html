@@ -16,7 +16,6 @@
 	<!-- content start -->
 	<div class="layout-cont">
 		<div class="layout-func">
-			<a href="javascript:;" data-click-event="addAudio" class="btn-func">新增语音</a>
 			<div style="margin-top:1rem;">
 				<select id="province-select" data-change-event="province">
 					<option>请选择地域</option>
@@ -42,22 +41,13 @@
 									<input type="checkbox">
 								</th> -->
 								<th>
-									语音
+									openId
 								</th>
 								<th>
-									经度
+									支付时间
 								</th>
 								<th>
-									纬度
-								</th>
-								<th>
-									大小
-								</th>
-								<th>
-									上次操作时间
-								</th>
-								<th style="width:18%;">
-									操作
+									支付方式
 								</th>
 							</tr>
 							<tr bind-repeat="gridData" style="display:none">
@@ -65,17 +55,9 @@
 									<input type="checkbox">
 								</td> -->
 								<!-- <td bind-content="$item.id"></td> -->
-								<td bind-content="$item.name"></td>
-								<td bind-content="$item.longitude"></td>
-								<td bind-content="$item.latitude"></td>
-								<td bind-content="$item.size"></td>
-								<td bind-content="$item.lastmodifytime"></td>
-								<td>
-									<div class="operate">
-										<a href="javascript:;" data-click-event="delete" bind-attr="data-id=$item.id" class="btn-del">删除</a>
-										<a href="javascript:;" data-click-event="modify" bind-attr="data-id=$item.id" class="btn-edit">编辑</a>
-									</div>
-								</td>
+								<td bind-content="$item.openId"></td>
+								<td bind-content="$item.paytime"></td>
+								<td bind-content="$item.method"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -106,9 +88,6 @@
 
 			<!-- table menu start -->
 			<!-- table menu end -->
-			<div class="layout-func">
-				<a href="javascript:;" data-click-event="addAudio" class="btn-func">新增语音</a>				
-			</div>
 		</div>
 	</div>
 	<!-- content end -->

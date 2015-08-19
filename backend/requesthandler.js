@@ -3,6 +3,7 @@ var connection = require('./connection'),
 	security = require('./security'),
 	region = require('./region'),
 	audio = require('./audio'),
+	payment = require('./payment'),
 	province = require('./province');
 
 connection.init();
@@ -12,3 +13,4 @@ exports.security = security;
 exports.region = region;
 exports.province = province;
 exports.audio = audio;
+exports.payment = payment;

@@ -655,6 +655,9 @@ module.exports = function (grunt) {
               'View':'spm_modules/spaseed/1.1.23/main/View',
               'Event':'spm_modules/spaseed/1.1.23/lib/Event',
               'Net':'spm_modules/spaseed/1.1.23/lib/Net',
+              'SideBarView': 'spm_modules/spaseed/1.1.23/main/SideBarView',
+              'CustomSideBarView':'app/script/module/CustomSideBarView',
+              'MenuView': 'spm_modules/spaseed/1.1.23/main/MenuView',
               
               'Dialog':'spm_modules/spaseed/1.1.23/lib/Dialog',
 
@@ -665,6 +668,7 @@ module.exports = function (grunt) {
 
               'binder':'spm_modules/spaseed/1.1.23/lib/binder',
               'cookie':'spm_modules/spaseed/1.1.23/lib/cookie',
+              'querystring':'spm_modules/spaseed/1.1.23/lib/querystring',
               'formatcheck':'spm_modules/spaseed/1.1.23/lib/formatcheck',
               'env':'spm_modules/spaseed/1.1.23/lib/env',
               'asyncrequest':'spm_modules/spaseed/1.1.23/lib/asyncrequest',
@@ -674,7 +678,7 @@ module.exports = function (grunt) {
               'config':'spm_modules/spaseed/1.1.23/config',
               
               'apptemplate':'tmp/view/compiled/view',
-              'request':'app/script/model/request'
+              'request':'app/script/model/request',
           },
           
           dest:'dist/script/app.combo.js'

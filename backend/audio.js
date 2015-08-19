@@ -37,10 +37,8 @@ var audio ={
 				else{
 					var sql = '';
 					if(query.id){
-						sql = mysql.format('select * from traveldb.audio where id=? order by id limit ?,?',[
-							query.id,
-							query.begin*1 || 0,
-							query.size*1 || 10
+						sql = mysql.format('select * from traveldb.audio where id=?',[
+							query.id
 						]);
 					}
 					else if(query.regionId){
@@ -171,7 +169,8 @@ var audio ={
 						var regionDir = fields.regionId[0];
 						var filepath = path.resolve(rootDirection+regionDir);
 						var promiseArray = [],
-							finalpath = filepath+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
+							finalpath = filepath+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3',
+							url = 'http://assets.xjimi.com/'+regionDir+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
 						
 						if(files.audioFiles){
 							var audiosource = fs.createReadStream(files.audioFiles[0].path);
@@ -201,7 +200,7 @@ var audio ={
 									'size',
 									fs.statSync(files.audioFiles[0].path).size,
 									'file',
-									finalpath,
+									url,
 									'lastmodifytime',
 									date,
 									'longitude',

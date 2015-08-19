@@ -30,7 +30,7 @@ var ActivationManagePageView = CustomSideBarView.extend({
         this.$net.request({
             request:request.province,
             success:function(data){
-                $('#province-select').html(template('region/provincelist',{provincelist:data}));
+                $('#province-select').html(template('provincelist',{provincelist:data}));
             }
         });
 
@@ -69,7 +69,7 @@ var ActivationManagePageView = CustomSideBarView.extend({
                 var self = this;
                 if(target.value != '0'){
                     this.$net.request({
-                        request:request.getAudio,
+                        request:request.getPayment,
                         data:{regionId:target.value, begin:0, size:self.pageSize},
                         success:function(data){
                             self.data.regionId = target.value;
