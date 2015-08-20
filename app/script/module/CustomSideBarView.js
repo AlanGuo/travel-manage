@@ -19,8 +19,10 @@ var CustomSideBarView = SideBarView.extend({
 		else{
 			location.href = '/#/account/signin';
 		}
-		this.$super(data);
 
+		this.$super(data);
+	},
+	bindEvent:function(){
 		this.$event.on(this,'click','signout',function(){
 			cookie['delete']('uin');
             cookie['delete']('skey');
@@ -28,9 +30,8 @@ var CustomSideBarView = SideBarView.extend({
             location.href = '/#/account/signin';
 		});
 
-		this.__sideBarHandler = {};
-		//绑定click事件
-		this.__sideBarHandler.click = this.$event.bindEvent(this, this.$elem, 'click');
+		this.__bodyhandler.click = this.$event.bindEvent(this, this.$elem, 'click');
+		this.$super();
 	}
 });
 

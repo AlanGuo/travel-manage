@@ -2,15 +2,17 @@
 
 var $ = require('$'),
     template = require('template'),
+    querystring = require('querystring'),
     CustomSideBarView = require('CustomSideBarView');
 
 var RegionAddSuccessPageView = CustomSideBarView.extend({
 
     render: function () {
         var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'audio'});
+        this.params = querystring.parse();
         this.renderContent({
             sidebar:sidebar,
-            container:template('audio/addsuccess',{action:'新增'})
+            container:template('audio/addsuccess',{action:'新增',provinceId:this.params.provinceId,regionId:this.params.regionId})
         });
     },
 

@@ -27,7 +27,10 @@ var View = Node.extend({
 		this.$off = this.$app.$event.off;
 		this.$emit = this.$app.$event.emit;
 		this.$router = this.$app.$router;
-		
+
+		this.bindEvents();
+	},
+	bindEvents:function(){
 		//绑定events
 		if(this.events){
 			this.__bodyhandler = this.__bodyhandler || {};

@@ -70,7 +70,7 @@ var AudioUpdatePageView = CustomSideBarView.extend({
             data:formdata,
             success:function(result){
                 if(!result.code){
-                    location.href = '/#/audio/updatesuccess';
+                    location.href = '/?provinceId='+self.params.provinceId+'&regionId='+self.params.regionId+'#/audio/updatesuccess';
                 }
             },
             error:function(msg){

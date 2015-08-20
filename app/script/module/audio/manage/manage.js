@@ -4,6 +4,7 @@ var $ = require('$'),
     template = require('template'),
     request = require('request'),
     asyncRequest = require('asyncrequest'),
+    querystring = require('querystring'),
     binder = require('binder'),
     Dialog = require('Dialog'),
     CustomSideBarView = require('CustomSideBarView');
@@ -15,11 +16,11 @@ var AudioManagePageView = CustomSideBarView.extend({
     title:'语音管理',
 
     render: function () {
+        var self = this;
     	this.data = {
-            provinceId:0,
-            regionId:0,
             gridData:[]
         };
+        this.params = querystring.parse();
         var sidebar = $('#side-nav').length?undefined:template('sidebar',{active:'audio'});
         this.renderContent({
             sidebar:sidebar,
@@ -30,18 +31,47 @@ var AudioManagePageView = CustomSideBarView.extend({
         this.$net.request({
             request:request.province,
             success:function(data){
-                $('#province-select').html(template('provincelist',{provincelist:data}));
+                self.$provinceSelect.html(template('provincelist',{provincelist:data}));
+                if(self.params.provinceId){
+                    self.$provinceSelect[0].value = self.params.provinceId;
+
+                    self.$regionSelect.html(template('regionlist',{regionlist:[]}));
+                    self.$net.request({
+                        request:request.getRegion,
+                        data:{provinceId:self.params.provinceId},
+                        success:function(data){
+                            self.$regionSelect.html(template('regionlist',{regionlist:data}));
+
+                            if(self.params.regionId){
+                                self.$regionSelect[0].value = self.params.regionId;
+                                self.$net.request({
+                                    request:request.getAudio,
+                                    data:{regionId:self.params.regionId, begin:0, size:self.pageSize},
+                                    success:function(data){
+                                        self.data.gridData = data;
+                                    }
+                                });
+                            }
+                            else{
+                                self.data.gridData = [];
+                            }
+                            
+                        }
+                    });
+                }
             }
         });
 
         this.$dialog = Dialog.create({$app:this.$app,$parent:this.$elem});
+        this.$provinceSelect = $('#province-select');
+        this.$regionSelect = $('#region-select');
     },
 
     loadGrid:function(begin){
         var self = this;
         asyncRequest.all(this.$net,[{
             request:request.getAudio,
-            params:{begin:begin, size:self.pageSize}
+            params:{regionId:this.params.regionId, begin:begin, size:self.pageSize}
         }],
         function(data){
             self.data.gridData = data[0];
@@ -62,7 +92,7 @@ var AudioManagePageView = CustomSideBarView.extend({
                 });
             },
             'modify':function(target){
-                window.location.href = '/?id='+target.getAttribute('data-id')+'#/audio/update';
+                window.location.href = '/?provinceId='+this.params.provinceId+'&regionId='+this.params.regionId+'&id='+target.getAttribute('data-id')+'#/audio/update';
             },
             'doDelete':function(){
                 if(this.deleteId){
@@ -85,38 +115,18 @@ var AudioManagePageView = CustomSideBarView.extend({
                 }
             },
             'addAudio':function(){
-                if(this.data.regionId != '0'){
-                    location.href = '/?regionId='+this.data.regionId+'#/audio/add';
+                if(this.params.regionId != '0'){
+                    location.href = '/?provinceId='+this.params.provinceId+'&regionId='+this.params.regionId+'#/audio/add';
                 }
                 
             }
         },
         'change':{
             'province':function(target){
-                var self = this;
-                $('#region-select').html(template('regionlist',{regionlist:[]}));
-                this.$net.request({
-                    request:request.getRegion,
-                    data:{provinceId:target.value},
-                    success:function(data){
-                        self.data.provinceId = target.value;
-                        $('#region-select').html(template('regionlist',{regionlist:data}));
-                        self.data.gridData = [];
-                    }
-                });
+                location.href = '/?provinceId='+target.value+(this.params.regionId?('&regionId='+this.params.regionId):'')+'#/audio/manage';
             },
             'region':function(target){
-                var self = this;
-                if(target.value != '0'){
-                    this.$net.request({
-                        request:request.getAudio,
-                        data:{regionId:target.value, begin:0, size:self.pageSize},
-                        success:function(data){
-                            self.data.regionId = target.value;
-                            self.data.gridData = data;
-                        }
-                    });
-                }
+                location.href = (this.params.provinceId?('/?provinceId='+this.params.provinceId):'')+'&regionId='+target.value+'#/audio/manage';
             }
         }
     },
