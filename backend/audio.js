@@ -308,7 +308,7 @@ var audio ={
 						}
 						var promiseArray = [],
 							finalpath = filepath+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
-							url += crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
+							url += regionDir+'/'+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
 						if(files.audioFiles){
 							var audiosource = fs.createReadStream(files.audioFiles[0].path);
 							var audiodest = fs.createWriteStream(finalpath);
