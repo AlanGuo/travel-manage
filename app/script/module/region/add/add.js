@@ -45,6 +45,7 @@ var RegionAddPageView = CustomSideBarView.extend({
     },
 
     prepare:function(){
+        this.data.formdata.name = this.data.formdata.name.trim();
         //这里检查输入的合法性
         var self = this;
         //更新数据

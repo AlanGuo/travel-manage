@@ -54,6 +54,7 @@ var RegionUpdatePageView = CustomSideBarView.extend({
 
     prepare:function(){
         //这里检查输入的合法性
+        this.data.formdata.name = this.data.formdata.name.trim();
         var self = this;
         //更新数据
         this.$net.request({

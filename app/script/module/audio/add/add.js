@@ -41,6 +41,7 @@ var AudioAddPageView = CustomSideBarView.extend({
         //这里检查输入的合法性
         var self = this;
         var formdata = new FormData();
+        this.data.formdata.name = this.data.formdata.name.trim();
         for(var p in this.data.formdata){
             if(/files/i.test(p)){
                 if(this.data.formdata[p].length){
@@ -63,7 +64,8 @@ var AudioAddPageView = CustomSideBarView.extend({
             },
             error:function(msg){
                 self.$errorTips.show(msg);
-            }
+            },
+            button:$('.btn-confirm')[0]
         });
     },
 

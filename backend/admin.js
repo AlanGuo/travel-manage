@@ -122,12 +122,22 @@ var admin = {
 		var cookie = request.headers.cookie;
 		console.log(users);
 		console.log(cookie);
-		return users.filter(function(item){
+		var loginedUsers = users.filter(function(item){
 			if(cookie.indexOf(item.uin)>-1 && 
 				cookie.indexOf(item.skey)>-1){
 				return item;
 			}
-		}).length>0;
+		});
+		if(loginedUsers && loginedUsers.length){
+			if(loginedUsers[0].loginTime > new Date()){
+				return true;
+			}
+			else{
+				//删除过期用户
+				users.splice(users.indexOf(loginedUsers[0]),1);
+				return false;
+			}
+		}
 	}
 }
 
