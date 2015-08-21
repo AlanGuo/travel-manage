@@ -170,7 +170,7 @@ var audio ={
 						var filepath = path.resolve(rootDirection+regionDir);
 						var promiseArray = [],
 							finalpath = filepath+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3',
-							url = 'http://assets.xjimi.com/'+regionDir+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
+							url = 'http://assets.xingzuotech.cn/'+regionDir+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
 						
 						if(files.audioFiles){
 							var audiosource = fs.createReadStream(files.audioFiles[0].path);
