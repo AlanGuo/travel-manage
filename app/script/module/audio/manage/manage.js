@@ -48,6 +48,9 @@ var AudioManagePageView = CustomSideBarView.extend({
                                     request:request.getAudio,
                                     data:{regionId:self.params.regionId, begin:0, size:self.pageSize},
                                     success:function(data){
+                                        for(var i=0;i<data.length;i++){
+                                            data[i].clientId = i+1;
+                                        }
                                         self.data.gridData = data;
                                     }
                                 });

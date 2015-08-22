@@ -36,6 +36,9 @@ var RegionManagePageView = CustomSideBarView.extend({
             params:{begin:begin, size:self.pageSize}
         }],
         function(data){
+            for(var i=0;i<data[0].length;i++){
+                data[0][i].clientId = i+1;
+            }
             self.data.gridData = data[0];
         });
     },
