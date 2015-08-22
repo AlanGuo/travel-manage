@@ -132,6 +132,7 @@ var admin = {
 			var nowDate = new Date();
 			if(loginedUsers[0].loginTime > nowDate){
 				//延长两个小时
+				var nowDate = new Date();
 				loginedUsers[0].loginTime = new Date(nowDate.setHours(nowDate.getHours()+2));
 				return true;
 			}
