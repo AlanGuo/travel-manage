@@ -21,7 +21,6 @@ var CustomSideBarView = SideBarView.extend({
 		}
 
 		this.$super(data);
-		this.bindEvents(data);
 	},
 	bindEvents:function(data){
 		this.$event.on(this,'click','signout',function(){
@@ -30,9 +29,6 @@ var CustomSideBarView = SideBarView.extend({
 
             location.href = '/#/account/signin';
 		});
-
-		this.__bodyhandler = {};
-		this.__bodyhandler.click = this.$event.bindEvent(this, this.$elem, 'click');
 		this.$super(data);
 	}
 });
