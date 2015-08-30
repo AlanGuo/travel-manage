@@ -296,7 +296,6 @@ var audio ={
 		if(/post/i.test(request.method)){
 			var form = new multiparty.Form();
 			var rootDirection = config.audioPath;
-			var url = '//assets.xjimi.com/';
 
 			form.parse(request, function(err, fields, files) {
 				if(!err){
@@ -308,7 +307,7 @@ var audio ={
 						}
 						var promiseArray = [],
 							finalpath = filepath+path.sep+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
-							url += regionDir+'/'+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
+							url = regionDir+'/'+crypto.createHash('md5').update(fields.name[0]).digest('hex')+'.mp3';
 						if(files.audioFiles){
 							var audiosource = fs.createReadStream(files.audioFiles[0].path);
 							var audiodest = fs.createWriteStream(finalpath);
