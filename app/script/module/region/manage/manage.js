@@ -3,8 +3,10 @@
 var $ = require('$'),
     template = require('template'),
     request = require('request'),
-    asyncRequest = require('asyncrequest'),
+    cookie = require('cookie'),
+    //asyncRequest = require('asyncrequest'),
     binder = require('binder'),
+    ErrorTips = require('ErrorTips'),
     Dialog = require('Dialog'),
     CustomSideBarView = require('CustomSideBarView');
 
@@ -12,9 +14,10 @@ var RegionManagePageView = CustomSideBarView.extend({
 
     pageSize: 10000,
 
-    title:'景区管理',
+    title:'推送管理',
 
     render: function () {
+
     	this.data = {
             gridData:[]
         };
@@ -23,68 +26,170 @@ var RegionManagePageView = CustomSideBarView.extend({
             sidebar:sidebar,
             container:template('region/manage')
         });
-        this.loadGrid(0,0,0);
+        this.loadData();
         this.binderObject = binder.bind(this.$elem,this.data);
 
+        this.$errorTips = ErrorTips.create({$elem:$('#errortips')});
         this.$dialog = Dialog.create({$app:this.$app,$parent:this.$elem});
     },
 
-    loadGrid:function(begin){
+    loadData:function(){
         var self = this;
-        asyncRequest.all(this.$net,[{
-            request:request.getRegion,
-            params:{begin:begin, size:self.pageSize}
-        }],
-        function(data){
-            for(var i=0;i<data[0].length;i++){
-                data[0][i].clientId = i+1;
+        this.$net.request({
+            request:request.querydevice,
+            data:{
+                userid:cookie.get('userid'),
+                cookie:document.cookie
+            },
+            success:function(data){
+                console.log(data);
+                var gridData = [];
+                for(var i=0;i<data.devices.length;i++){
+                    var device = data.devices[i];
+                    var deviceData = {
+                        id:i+1,
+                        regionName:'广东深圳',
+                        name:decodeURIComponent(device.aliasname) || device.serverip,
+                        pid:device.pid,
+                        checked:false,
+                        status:''
+                    };
+                    gridData.push(deviceData);
+                }
+                self.data.gridData = gridData;                  
+            },
+            error:function(){ 
             }
-            self.data.gridData = data[0];
         });
+
+        this.data.files = null;
+        this.data.uploadPercentString = '0%';
+        
+        this.data.pushEnabled =  false;
+        this.data.fileUrl = null;
     },
 
     events:{
         'click':{
-            'delete':function(target){
-                this.deleteId = target.getAttribute('data-id');
-                this.$dialog.show('确定要删除这个景区吗？',{
-                    buttons:[{
-                        text:'删除',
-                        event:'doDelete'
-                    },{
-                        text:'取消'
-                    }]
+            'clickall':function(target){
+                this.data.gridData.map(function(item){
+                    item.checked = target.checked;
                 });
+
+                if(this.data.fileUrl){
+                    this.data.pushEnabled = this.data.gridData.some(function(item){
+                        return item.checked === true;
+                    });
+                }
+
+                return true;
             },
-            'modify':function(target){
-                window.location.href = '/?id='+target.getAttribute('data-id')+'#/region/update';
+            'checkone':function(){
+                var self = this;
+                if(self.data.fileUrl){
+                    setTimeout(function(){
+                        self.data.pushEnabled = self.data.gridData.some(function(item){
+                            return item.checked === true;
+                        });
+                    });
+                }
+                
+                return true;
             },
-            'doDelete':function(){
-                if(this.deleteId){
-                    var self = this;
-                    this.$net.request({
-                        request:request.deleteRegion,
-                        data:{id:this.deleteId},
-                        success:function(){
-                            self.data.gridData = self.data.gridData.filter(function(item){
-                                if(item.id!=self.deleteId){
-                                    return item;
+            'push':function(target){
+                var self = this;
+                if(!$(target).hasClass('disabled')){
+                    self.data.gridData.forEach(function(item){
+                        if(item.checked){
+                            self.$net.request({
+                                request:request.push,
+                                data:{
+                                    pid:item.pid,
+                                    cookie:document.cookie,
+                                    task:self.data.fileUrl
+                                },
+                                success:function(){
+                                    item.status = '任务创建成功';                           
+                                },
+                                error:function(){
+                                    //self.$errorTips.show(msg);
+                                    item.status = '任务创建失败';  
                                 }
                             });
-                            self.$dialog.hide();
-                        },
-                        error:function(){
-                            self.$dialog.alert('删除失败');
                         }
                     });
                 }
+            },
+            'upload':function(){
+                if(this.data.files && this.data.files.length){
+
+                    var self = this;
+                    var formdata = new FormData();
+
+                    //for(let i=0;i<this.data.files.length;i++){
+                    formdata.append('file',this.data.files[0]);
+                    //}
+                    
+                    self.$elem.find('#upload-button').hide();
+                    self.$elem.find('#progress-bar').show();
+
+                    this.$net.request({
+                        request:request.uploadfile,
+                        data:formdata,
+                        success:function(result){
+                            self.$elem.find('#upload-button').hide();
+                            self.$elem.find('#progress-bar').hide();
+                            self.$elem.find('#upoad-success').show();
+                            self.$elem.find('#server-process').hide();
+
+                            self.data.fileUrl = result.url;                            
+                        },
+                        uploadProgress:function(evt){
+                            var loaded = evt.loaded;
+                            var tot = evt.total;
+                            var per = Math.floor(100 * loaded / tot);
+                            self.data.uploadPercentString = per+'%';
+
+                            if(per >= 100){
+                                self.$elem.find('#upload-button').hide();
+                                self.$elem.find('#progress-bar').hide();
+                                self.$elem.find('#upoad-success').hide();
+                                self.$elem.find('#server-process').show();
+                            }
+                        },
+                        error:function(msg){
+                            self.$errorTips.show(msg);
+
+                            self.$elem.find('#upload-button').show();
+                            self.$elem.find('#progress-bar').hide();
+                            self.$elem.find('#upoad-success').hide();
+                            self.$elem.find('#server-process').hide();
+
+                            self.data.fileUrl = null;
+                        },
+                        button:$('.btn-confirm')[0]
+                    });
+                }
+            },
+            newfile:function(){
+                var self = this;
+                self.$elem.find('#upload-button').show();
+                self.$elem.find('#progress-bar').hide();
+                self.$elem.find('#upoad-success').hide();
+                self.$elem.find('#server-process').hide();
+                self.data.files = null;
+                self.data.fileUrl = null;
+
+                this.data.gridData.forEach(function(item){
+                    item.status = '';
+                });
             }
         }
     },
 
     destroy:function(){
         this.$super();
-        this.binderObject.unobserve();
+        //this.binderObject.unobserve();
     }
 });
     

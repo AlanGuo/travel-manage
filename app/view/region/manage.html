@@ -1,3 +1,9 @@
+<div class="layout-err-tips-wrapper">
+	<span class="layout-err-tips" id="errortips">
+	</span>
+</div>
+
+
 <div class="main-cont">
 	<!-- title start -->
 	<div class="layout-title">
@@ -5,10 +11,10 @@
 		<div class="crumb-nav">
 			<a href="/#/index">首页</a>
 			<span class="arrow-right">></span>
-			<span>景区管理</span>
+			<span>推送管理</span>
 		</div>
 
-		<h2 class="topic">景区管理</h2>
+		<h2 class="topic">推送管理</h2>
 
 	</div>
 	<!-- title end -->
@@ -16,66 +22,68 @@
 	<!-- content start -->
 	<div class="layout-cont">
 		<div class="layout-func">
-			<a href="/#/region/add" class="btn-func">新增景区</a>				
+			<input type="file" bind-file="files"></input>
+			<a href="javascript:;" id="upload-button" data-click-event="upload" bind-attr="class={files}?'btn-func':'btn-func disabled'">上传至服务器</a>
+			<div class="progress-bar" id="progress-bar" style="display: none">
+				<div bind-content="uploadPercentString" class="indicator"></div>
+				<div class="progress-bar-load" bind-attr="style='width:'+{uploadPercentString}">
+					&nbsp;
+				</div>
+			</div>
+			<div class="hint" id="server-process" style="display: none">
+				服务器处理中...
+			</div>
+			<div class="hint upload-success" id="upoad-success" style="display: none">
+				上传成功
+				<a class="link" href="javascript:;" data-click-event="newfile">重新上传</a>
+			</div>
 		</div>
 
 		<div class="tablelist-wrapper">
 
-			<div class="tablelist-cont">
+			<div class="table-title">
+				<h2 class="topic">选择推送目标</h2>
+			</div>
 
+			<div class="tablelist-cont">
 					<!-- table start -->
 					<div class="table-infor">
-					
-					<div class="table-wrapper">
-					<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
-						<tbody id="tbody">
-							<tr>
-								<!-- <th>
-									<input type="checkbox">
-								</th> -->
-								<th>
-									编号
-								</th>
-								<th>
-									id
-								</th>
-								<th>
-									地域
-								</th>
-								<th>
-									景区
-								</th>
-								<th>
-									经度
-								</th>
-								<th>
-									纬度
-								</th>
-								
-								<th style="width:18%;">
-									操作
-								</th>
-							</tr>
-							<tr bind-repeat="gridData" style="display:none">
-								<!-- <td>
-									<input type="checkbox">
-								</td> -->
-								<td bind-content="$item.clientId"></td>
-								<td bind-content="$item.id"></td>
-								<td bind-content="$item.provinceName"></td>
-								<td bind-content="$item.regionName"></td>
-								<td bind-content="$item.longitude"></td>
-								<td bind-content="$item.latitude"></td>
-								<td>
-									<div class="operate">
-										<a href="javascript:;" data-click-event="delete" bind-attr="data-id=$item.id" class="btn-del">删除</a>
-										<a href="javascript:;" data-click-event="modify" bind-attr="data-id=$item.id" class="btn-edit">编辑</a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
+						<div class="table-wrapper">
+							<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+								<tbody id="tbody">
+									<tr>
+										<th>
+											编号
+										</th>
+										<th>
+											地区
+										</th>
+										<th>
+											单位/个人
+										</th>
+										<th>
+											下载宝pid
+										</th>
+										<th>
+											状态
+										</th>
+										<th>
+											<input type="checkbox" data-click-event="clickall">
+										</th>
+									</tr>
+									<tr bind-repeat="gridData" style="display:none">
+										<td bind-content="id"></td>
+										<td bind-content="regionName"></td>
+										<td bind-content="name"></td>
+										<td bind-content="pid"></td>
+										<td bind-content="status"></td>
+										<td>
+											<input bind-checked="checked" data-click-event="checkone" type="checkbox">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					<!-- 分页 start -->
 					<!-- <div class="box-paging clear">
 						<span class="prev">上一页</span>
@@ -99,11 +107,8 @@
 				</div>
 				<!-- table end -->
 			</div>
-
-			<!-- table menu start -->
-			<!-- table menu end -->
-			<div class="layout-func">
-				<a href="/#/region/add" class="btn-func">新增景区</a>				
+			<div class="primary-func push-button fr">
+				<a href="javascript:;" data-click-event="push"  bind-attr="class={pushEnabled}?'btn-func':'btn-func disabled'">推送</a>				
 			</div>
 		</div>
 	</div>

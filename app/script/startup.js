@@ -6,6 +6,13 @@ var $ = require('$');
 //应用入口函数
 var startup = function(container){
 	container = container || $('#wrapper-all');
+
+	if (!xlQuickLogin.isLogined()) {
+		if(location.href != '#/account/signin'){
+	        location.href = '#/account/signin';
+	    }
+    }
+
 	var app = App.create($.extend(config,{
 		
 		viewfolder:'app/script/module',

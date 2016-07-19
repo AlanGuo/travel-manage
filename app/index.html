@@ -6,7 +6,7 @@
   <meta name="description" content="webapp">
   <meta name="author" content="alan">
   
-  <title>行坐文化科技</title>
+  <title>迅雷文件推送系统</title>
   
   <!--for main style-->
   <!-- build:css({tmp,app,.}) style/main.css -->
@@ -15,18 +15,18 @@
   <link rel="stylesheet" href="style/login.css">
   <link rel="stylesheet" href="style/region.css">
   <link rel="stylesheet" href="style/add_new.css">
-  <link rel="stylesheet" href="spm_modules/spaseed/1.1.23/style/common.css">
+  <link rel="stylesheet" href="spm_modules/spaseed/1.1.24/style/common.css">
   <!-- endbuild -->
 
   <style type="text/css">
     /*fonts icos*/
     @font-face {
       font-family: 'icomoon';
-      src: url('/font/icomoon.eot?20150630');
-        src: url('/font/icomoon.eot?20150630#iefix') format('embedded-opentype'),
-        url('/font/icomoon.woff?20150630') format('woff'),
-        url('/font/icomoon.ttf?20150630') format('truetype'),
-        url('/font/icomoon.svg?20150630#iconfont') format('svg');
+      src: url('font/icomoon.eot?20150630');
+        src: url('font/icomoon.eot?20150630#iefix') format('embedded-opentype'),
+        url('font/icomoon.woff?20150630') format('woff'),
+        url('font/icomoon.ttf?20150630') format('truetype'),
+        url('font/icomoon.svg?20150630#iconfont') format('svg');
         font-weight: normal;
         font-style: normal;
     }
@@ -167,16 +167,23 @@
       </div>
     </div>
    
-    <!-- build:js({tmp,app}) script/vendors.js -->
+    <!-- build:js(.) script/vendors.js -->
     
     
     
     <!-- bower:js -->
+    <script src="bower_components/object.observe/dist/object-observe.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+    <script type="text/javascript" src="http://i.xunlei.com/login/2.5/qLogin.min.js"></script>
     <!--主程序脚本-->
-    
+    <script type="text/javascript">
+      xlQuickLogin.init({
+            loginID :   '113',  // 字符串，登录类型，方便统计，请按照文档下面的登录类型来设置（必须设定）
+            uiTheme : 'popup',
+            registerID:'yuancheng_web'
+        });
+    </script>
     
     
 
@@ -199,36 +206,36 @@
             base:'/',
             alias: {
                 //spaseed
-                '$':'spm_modules/spaseed/1.1.23/lib/dom',
-                'mp':'spm_modules/spaseed/1.1.23/main/mp',
-                'App':'spm_modules/spaseed/1.1.23/main/App',
-                'Router':'spm_modules/spaseed/1.1.23/main/Router',
-                'AppRouter':'spm_modules/spaseed/1.1.23/main/HashRouter',
-                'Node':'spm_modules/spaseed/1.1.23/main/Node',
-                'View':'spm_modules/spaseed/1.1.23/main/View',
-                'Event':'spm_modules/spaseed/1.1.23/lib/Event',
-                'Net':'spm_modules/spaseed/1.1.23/lib/Net',
-                'SideBarView': 'spm_modules/spaseed/1.1.23/main/SideBarView',
+                '$':'spm_modules/spaseed/1.1.24/lib/dom',
+                'mp':'spm_modules/spaseed/1.1.24/main/mp',
+                'App':'spm_modules/spaseed/1.1.24/main/App',
+                'Router':'spm_modules/spaseed/1.1.24/main/Router',
+                'AppRouter':'spm_modules/spaseed/1.1.24/main/HashRouter',
+                'Node':'spm_modules/spaseed/1.1.24/main/Node',
+                'View':'spm_modules/spaseed/1.1.24/main/View',
+                'Event':'spm_modules/spaseed/1.1.24/lib/Event',
+                'Net':'spm_modules/spaseed/1.1.24/lib/Net',
+                'SideBarView': 'spm_modules/spaseed/1.1.24/main/SideBarView',
                 'CustomSideBarView':'app/script/module/CustomSideBarView',
-                'MenuView': 'spm_modules/spaseed/1.1.23/main/MenuView',
+                'MenuView': 'spm_modules/spaseed/1.1.24/main/MenuView',
                 
-                'Dialog':'spm_modules/spaseed/1.1.23/lib/Dialog',
+                'Dialog':'spm_modules/spaseed/1.1.24/lib/Dialog',
 
 
-                'Mask':'spm_modules/spaseed/1.1.23/lib/Mask',
-                'ErrorTips':'spm_modules/spaseed/1.1.23/lib/ErrorTips',
-                'Loading':'spm_modules/spaseed/1.1.23/lib/Loading',
+                'Mask':'spm_modules/spaseed/1.1.24/lib/Mask',
+                'ErrorTips':'spm_modules/spaseed/1.1.24/lib/ErrorTips',
+                'Loading':'spm_modules/spaseed/1.1.24/lib/Loading',
 
-                'binder':'spm_modules/spaseed/1.1.23/lib/binder',
-                'cookie':'spm_modules/spaseed/1.1.23/lib/cookie',
-                'querystring':'spm_modules/spaseed/1.1.23/lib/querystring',
-                'formatcheck':'spm_modules/spaseed/1.1.23/lib/formatcheck',
-                'env':'spm_modules/spaseed/1.1.23/lib/env',
-                'asyncrequest':'spm_modules/spaseed/1.1.23/lib/asyncrequest',
-                'stats':'spm_modules/spaseed/1.1.23/lib/stats',
-                'template':'spm_modules/spaseed/1.1.23/lib/template',
+                'binder':'spm_modules/spaseed/1.1.24/lib/binder',
+                'cookie':'spm_modules/spaseed/1.1.24/lib/cookie',
+                'querystring':'spm_modules/spaseed/1.1.24/lib/querystring',
+                'formatcheck':'spm_modules/spaseed/1.1.24/lib/formatcheck',
+                'env':'spm_modules/spaseed/1.1.24/lib/env',
+                'asyncrequest':'spm_modules/spaseed/1.1.24/lib/asyncrequest',
+                'stats':'spm_modules/spaseed/1.1.24/lib/stats',
+                'template':'spm_modules/spaseed/1.1.24/lib/template',
 
-                'config':'spm_modules/spaseed/1.1.23/config',
+                'config':'spm_modules/spaseed/1.1.24/config',
                 
                 'apptemplate':'tmp/view/compiled/view',
                 'request':'app/script/model/request',

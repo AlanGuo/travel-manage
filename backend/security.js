@@ -1,4 +1,3 @@
-var ccap = require('ccap');
 var vercode = '';
 
 var security = {

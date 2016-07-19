@@ -3,6 +3,7 @@
       "prefix":"/cgi-bin",
       "module":"backend/requesthandler"
   },
+  "staticPath":["../xunleifile"],
   "port":8080,
   "expires":[{
     "fileMatch": ".gif|png|jpg|jpeg|js|css|mp3|ogg",
@@ -11,11 +12,5 @@
   "log":"web.log",
   "index":"index.html",
   "singlePage": true,
-  "webSocket":{
-    "handle":{
-        "prefix":"websocket"
-    },
-    "sub-protocol":["echo-protocol-pc","echo-protocol-mobile"]
-  },
-  "audioPath":"../travelAudio/"
+  "filePath":"../xunleifile/"
 }

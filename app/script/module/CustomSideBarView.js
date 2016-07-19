@@ -10,26 +10,26 @@ var CustomSideBarView = SideBarView.extend({
 	elements:{},
 
 	ctor:function(data){
-		var uin = cookie.get('uin'),
-			skey = cookie.get('skey');
+		var name = cookie.get('usernick');
 
-		if(uin && skey){
-			data.sidebarData = {user:uin};
-		}
-		else{
-			location.href = '/#/account/signin';
+		if(name){
+			data.sidebarData = {user:name};
 		}
 
 		this.$super(data);
 	},
-	bindEvents:function(data){
+	bindEvents:function(){
 		this.$event.on(this,'click','signout',function(){
-			cookie['delete']('uin');
-            cookie['delete']('skey');
-
-            location.href = '/#/account/signin';
+			xlQuickLogin.logout();
 		});
-		this.$super(data);
+		
+		if(this.events){
+		 	this.$super();
+		}
+		else{
+			this.__bodyhandler = {};
+			this.__bodyhandler.click = this.$event.bindEvent(this, this.$elem, 'click');
+		}
 	}
 });
 

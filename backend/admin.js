@@ -6,6 +6,8 @@ var crypto = require('crypto'),
 	util = require('./util'),
 	bodyParser = require('body-parser'),
 	connection = require('./connection'),
+	Sequelize = require('sequelize'),
+	schema = require('./schema'),
 	//登录态
 	users=[];
 
@@ -16,96 +18,54 @@ var admin = {
 			var urlencodedParser = bodyParser.urlencoded({ extended: false });
 			urlencodedParser(request,response,function(){
 				var postData = request.body;
-				if(security.vercode() == postData.vercode){
-					connection.pool.getConnection(function(err, connection){
-						if(err){
-							console.log(err);
-							util.jsonRespond(response,{
-								code:501,
+				return schema.Admin.findOne({
+					where: {
+					    email: postData.login
+					}
+				}).then(function(user) {
+					if(user){
+						if(user.password === crypto.createHash('md5').update(postData.userpassword).digest('hex')){
+							var curDate = new Date();
+							var nowDate = new Date(curDate.getTime() + 1000 * 2592000);
+							var skey = crypto.createHash('md5').update(user.uid+(+new Date())).digest('hex');
+							// console.log(user.uid);
+							util.jsonRespond(response, {
+								code:0,
 								data:{},
-								msg:'get connection failed'
+								msg:''
 							},{
-								status:500
+								'Set-Cookie':[
+									'uid='+user.uid+'; expires='+nowDate.toString()+'; path=/;',
+									'name='+user.name+'; expires='+nowDate.toString()+'; path=/;', 
+									'skey='+skey+'; expires='+nowDate.toString()+'; path=/'
+								]
+							});
+							users.push({uid:user.uid,skey:skey,loginTime:nowDate*1});
+						}else{
+							util.jsonRespond(response,{
+								code:101,
+								data:{},
+								msg:'登录名或密码错误'
 							});
 						}
-						else{
-							var comlumns = ['name','email','mobile','password'];
-							var sql = mysql.format('select ?? from traveldb.user where type=1 and email=? or mobile=?',[comlumns,postData.login,postData.login]);
-							connection.query(sql,function(err, rows){
-								connection.release();
-								if(!err){
-									if(rows.length){
-										if(rows[0].password === crypto.createHash('md5').update(postData.userpassword).digest('hex')){
-											var nowDate = new Date();
-											nowDate = new Date(nowDate.setHours(nowDate.getHours()+2));
-											var skey = crypto.createHash('md5').update(rows[0].name+(+new Date())).digest('hex');
-											util.jsonRespond(response,{
-												code:0,
-												data:{},
-												msg:''
-											},{
-												'Set-Cookie':[
-													'uin='+postData.login+'; expires='+nowDate.toString()+'; path=/;',
-													'skey='+skey+'; expires='+nowDate.toString()+'; path=/'
-												]
-											});
+					}else{
+						util.jsonRespond(response,{
+							code:101,
+							data:{},
+							msg:'登录名或密码错误'
+						});
+					}
 
-											var has = false;
-											users.forEach(function(item){
-												if(item.uin == postData.login){
-													has = true;
-													item.skey = skey;
-												}
-											});
-											if(!has){
-												users.push({
-													uin:postData.login,
-													skey:skey,
-													loginTime:nowDate
-												});
-											}
-
-											console.log(users);
-										}
-										else{
-											util.jsonRespond(response,{
-												code:101,
-												data:{},
-												msg:'登录名或密码错误'
-											});
-										}
-									}
-									else{
-										util.jsonRespond(response,{
-											code:102,
-											data:{},
-											msg:'登录名或密码错误'
-										});
-									}
-								}
-								else{
-									console.log(err);
-									util.jsonRespond(response,{
-										code:502,
-										data:{},
-										msg:'query user failed'
-									},{
-										status:500
-									});
-								}
-							});
-						}
-					});
-				}
-				else{
+				}).catch(function(err) {
+					// console.log(err);
 					util.jsonRespond(response,{
-						code:401,
+						code:502,
 						data:{},
-						msg:'验证码错误'
+						msg:JSON.stringify(err)
 					},{
-						status:401
+						status:500
 					});
-				}
+				});
 			});
 		}
 		else{

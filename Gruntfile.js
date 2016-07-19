@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       //pri越大，加载越靠前
       localstoragePriority = [
         {key:'sea',pri:2,ext:'js'},
-        {key:'app.combo',pri:1,ext:'js'}
+        {key:'combo.app',pri:1,ext:'js'}
       ];
 
   var localStorageRewriteScript=function(contents,filePath,prefix){
@@ -142,14 +142,14 @@ module.exports = function (grunt) {
       
       css:{
         files: ['<%= yeoman.app %>/style/**/*.css'],
-        tasks: ['newer:jshint:all','newer:autoprefixer','cdnify:serve'],
+        tasks: ['newer:jshint:all','newer:autoprefixer','newer:cdnify:serve'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       
       view:{
-        files: ['<%= yeoman.app %>/view/**/*.html','spm_modules/spaseed/1.1.23/view/**/*.html'],
+        files: ['<%= yeoman.app %>/view/**/*.html','spm_modules/spaseed/1.1.24/view/**/*.html'],
         tasks: ['cdnify:view','tmod'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -162,6 +162,14 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test']
       },
       
+      
+      compass: {
+        files: ['<%= yeoman.app %>/style/**/*.{scss,sass}'],
+        tasks: ['compass:server', 'autoprefixer', 'cdnify:serve'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
       
 
 
@@ -256,7 +264,8 @@ module.exports = function (grunt) {
                 },
                 serveStatic('tmp'),
                 serveStatic(appConfig.app),
-                serveStatic('.')
+                serveStatic('.'),
+                serveStatic('../xunleifile')
               ];
           }
         }
@@ -309,7 +318,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             'tmp',
-            
+            '.sass-cache',
             '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git*'
           ]
@@ -322,17 +331,17 @@ module.exports = function (grunt) {
     // Add vendor prefixed styles
     autoprefixer: {
       options: {
-        browsers: ['last 1 version']
+        browsers: ['iOS 7']
       },
-      
-        servecss: {
-          files: [{
-            expand: true,
-            cwd: '<%= yeoman.app %>/style/',
-            src: '**/*.css',
-            dest: 'tmp/style/'
-          }]
-        }
+      //把样式文件拷贝到了tmp/autoprefixerstyle
+      servecss: {
+        files: [{
+          expand: true,
+          cwd: 'tmp/compassstyle/',
+          src: '**/*.css',
+          dest: 'tmp/autoprefixerstyle/'
+        }]
+      },
       
     },
 
@@ -341,9 +350,47 @@ module.exports = function (grunt) {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
+      },
+      sass: {
+        src: ['<%= yeoman.app %>/style/**/*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+      },
+      css: {
+        src: ['<%= yeoman.app %>/style/**/*.{css}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
 
+    
+    // Compiles Sass to CSS and generates necessary files if requested
+    compass: {
+      options: {
+        sassDir: '<%= yeoman.app %>/style',
+        cssDir: 'tmp/compassstyle',
+        //用于合成雪碧图
+        generatedImagesDir: 'tmp/image/generated',
+        imagesDir: '<%= yeoman.app %>/image',
+        javascriptsDir: '<%= yeoman.app %>/script',
+        fontsDir: '<%= yeoman.app %>/font',
+        importPath: './bower_components',
+        httpImagesPath: '/image',
+        httpGeneratedImagesPath: '/image/generated',
+        httpFontsPath: '/font',
+        relativeAssets: false,
+        assetCacheBuster: false,
+        raw: 'Sass::Script::Number.precision = 10\n'
+      },
+      dist: {
+        options: {
+          generatedImagesDir: '<%= yeoman.dist %>/image/generated'
+        }
+      },
+      server: {
+        options: {
+          debugInfo: false
+        }
+      }
+    },
     
 
     // Renames files for browser caching purposes
@@ -387,7 +434,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/**/*.html','<%= yeoman.dist %>/script/**/*.js'],
       css: ['<%= yeoman.dist %>/style/**/*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/image','<%= yeoman.dist %>/style/font']
+        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/image','<%= yeoman.dist %>/font']
       }
     },
 
@@ -408,8 +455,8 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/script/app.combo.js': [
-            '<%= yeoman.dist %>/script/app.combo.js'
+          '<%= yeoman.dist %>/script/combo.app.js': [
+            '<%= yeoman.dist %>/script/combo.app.js'
           ]
         }
       }
@@ -463,30 +510,23 @@ module.exports = function (grunt) {
     cdnify: {
       serve:{
         options: {
-          rewriter: function (url) {
-            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1){
-              return url;
-            }else{
-              return local+url;
-            }
-          }
+          base: local
         },
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: '**/*.{css,html}',
+          src: '**/*.html',
           dest: 'tmp'
+        },{
+          expand: true,
+          cwd: 'tmp/autoprefixerstyle',
+          src: '**/*.css',
+          dest: 'tmp/style'
         }]
       },
       view:{
         options: {
-          rewriter: function (url) {
-            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1){
-              return url;
-            }else{
-              return local+url;
-            }
-          }
+          base: local
         },
         files: [{
           expand: true,
@@ -497,13 +537,7 @@ module.exports = function (grunt) {
       },
       viewdist:{
         options: {
-          rewriter: function (url) {
-            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1){
-              return url;
-            }else{
-              return cdn+url;
-            }
-          }
+          base: cdn
         },
         files: [{
           expand: true,
@@ -514,13 +548,7 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          rewriter: function (url) {
-            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1){
-              return url;
-            }else{
-              return cdn+url;
-            }
-          }
+          base: cdn
         },
         files: [{
           expand: true,
@@ -533,6 +561,12 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      compasscss:{
+        expand: true,
+          cwd: 'tmp/autoprefixerstyle',
+          dest: 'tmp/style',
+          src: ['*.css']
+      },
       dist: {
         files: [{
           expand: true,
@@ -571,6 +605,18 @@ module.exports = function (grunt) {
           cwd:'spm_modules/seajs/2.3.0/dist/',
           dest:'<%= yeoman.dist %>/script',
           src:['sea.js']
+        },{
+          //croppie
+          expand:true,
+          cwd:'bower_components/Croppie/',
+          dest:'<%= yeoman.dist %>/bower_components/Croppie',
+          src:['croppie.js']
+        },{
+          //cssshake
+          expand:true,
+          cwd:'bower_components/slider/',
+          dest:'<%= yeoman.dist %>/bower_components/slider',
+          src:['slider-animate.js']
         }]
       }
     },
@@ -579,11 +625,17 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         
+        'compass:server'
+        
       ],
       test: [
         
+        'compass'
+        
       ],
       dist: [
+        
+        'compass:dist',
         
         'imagemin',
         'svgmin'
@@ -594,22 +646,24 @@ module.exports = function (grunt) {
 
     
     tmod: {
+      
       spaseedtemplate: {
-        src: ['spm_modules/spaseed/1.1.23/view/**/*.html'],
+        src: ['spm_modules/spaseed/1.1.24/view/**/*.html'],
         dest: 'tmp/spaseed/view/view.js',
         options: {
-            base: 'spm_modules/spaseed/1.1.23/view',
+            base: 'spm_modules/spaseed/1.1.24/view',
             minify: false,
             namespace:'spaseedtemplate'
         }
       },
+      
       template: {
         src: 'tmp/view/**/*.html',
         dest: 'tmp/view/compiled/view.js',
         options: {
             base: 'tmp/view',
             minify:false,
-            namespace:'travelManagetmpl'
+            namespace:'yiqituyatmpl'
         } 
       }
     },
@@ -633,7 +687,7 @@ module.exports = function (grunt) {
         dist: {
           src: 'dist/index.html',
           editor: function(contents) {
-            return contents.replace(/<\!\-\-\{\{combo\}\}\-\->/ig,'<script type="text/javascript" src="script/app.combo.js"></script>');
+            return contents.replace(/<\!\-\-\{\{combo\}\}\-\->/ig,'<script type="text/javascript" src="script/combo.app.js"></script>');
           }
         }
       },
@@ -646,42 +700,43 @@ module.exports = function (grunt) {
           
           alias: {
               //spaseed
-              '$':'spm_modules/spaseed/1.1.23/lib/dom',
-              'mp':'spm_modules/spaseed/1.1.23/main/mp',
-              'App':'spm_modules/spaseed/1.1.23/main/App',
-              'Router':'spm_modules/spaseed/1.1.23/main/Router',
-              'AppRouter':'spm_modules/spaseed/1.1.23/main/HashRouter',
-              'Node':'spm_modules/spaseed/1.1.23/main/Node',
-              'View':'spm_modules/spaseed/1.1.23/main/View',
-              'Event':'spm_modules/spaseed/1.1.23/lib/Event',
-              'Net':'spm_modules/spaseed/1.1.23/lib/Net',
-              'SideBarView': 'spm_modules/spaseed/1.1.23/main/SideBarView',
-              'CustomSideBarView':'app/script/module/CustomSideBarView',
-              'MenuView': 'spm_modules/spaseed/1.1.23/main/MenuView',
+              '$':'spm_modules/spaseed/1.1.24/lib/dom',
+                'mp':'spm_modules/spaseed/1.1.24/main/mp',
+                'App':'spm_modules/spaseed/1.1.24/main/App',
+                'Router':'spm_modules/spaseed/1.1.24/main/Router',
+                'AppRouter':'spm_modules/spaseed/1.1.24/main/HashRouter',
+                'Node':'spm_modules/spaseed/1.1.24/main/Node',
+                'View':'spm_modules/spaseed/1.1.24/main/View',
+                'Event':'spm_modules/spaseed/1.1.24/lib/Event',
+                'Net':'spm_modules/spaseed/1.1.24/lib/Net',
+                'SideBarView': 'spm_modules/spaseed/1.1.24/main/SideBarView',
+                'CustomSideBarView':'app/script/module/CustomSideBarView',
+                'MenuView': 'spm_modules/spaseed/1.1.24/main/MenuView',
+                
+                'Dialog':'spm_modules/spaseed/1.1.24/lib/Dialog',
+
+
+                'Mask':'spm_modules/spaseed/1.1.24/lib/Mask',
+                'ErrorTips':'spm_modules/spaseed/1.1.24/lib/ErrorTips',
+                'Loading':'spm_modules/spaseed/1.1.24/lib/Loading',
+
+                'binder':'spm_modules/spaseed/1.1.24/lib/binder',
+                'cookie':'spm_modules/spaseed/1.1.24/lib/cookie',
+                'querystring':'spm_modules/spaseed/1.1.24/lib/querystring',
+                'formatcheck':'spm_modules/spaseed/1.1.24/lib/formatcheck',
+                'env':'spm_modules/spaseed/1.1.24/lib/env',
+                'asyncrequest':'spm_modules/spaseed/1.1.24/lib/asyncrequest',
+                'stats':'spm_modules/spaseed/1.1.24/lib/stats',
+                'template':'spm_modules/spaseed/1.1.24/lib/template',
+
+                'config':'spm_modules/spaseed/1.1.24/config',
+                
+                'apptemplate':'tmp/view/compiled/view',
+                'request':'app/script/model/request',
               
-              'Dialog':'spm_modules/spaseed/1.1.23/lib/Dialog',
-
-
-              'Mask':'spm_modules/spaseed/1.1.23/lib/Mask',
-              'ErrorTips':'spm_modules/spaseed/1.1.23/lib/ErrorTips',
-              'Loading':'spm_modules/spaseed/1.1.23/lib/Loading',
-
-              'binder':'spm_modules/spaseed/1.1.23/lib/binder',
-              'cookie':'spm_modules/spaseed/1.1.23/lib/cookie',
-              'querystring':'spm_modules/spaseed/1.1.23/lib/querystring',
-              'formatcheck':'spm_modules/spaseed/1.1.23/lib/formatcheck',
-              'env':'spm_modules/spaseed/1.1.23/lib/env',
-              'asyncrequest':'spm_modules/spaseed/1.1.23/lib/asyncrequest',
-              'stats':'spm_modules/spaseed/1.1.23/lib/stats',
-              'template':'spm_modules/spaseed/1.1.23/lib/template',
-
-              'config':'spm_modules/spaseed/1.1.23/config',
-              
-              'apptemplate':'tmp/view/compiled/view',
-              'request':'app/script/model/request',
           },
           
-          dest:'dist/script/app.combo.js'
+          dest:'dist/script/combo.app.js'
           },
           files: [{
               expand: true,
@@ -735,9 +790,11 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
-    'autoprefixer',
-    'useminPrepare',
     'concurrent:dist',
+    'autoprefixer',
+    'copy:compasscss',
+    'useminPrepare',
+    
     'jshint',
     'concat',
     
@@ -760,9 +817,10 @@ module.exports = function (grunt) {
   grunt.registerTask('buildmin', [
     'clean:dist',
     'wiredep',
-    'autoprefixer',
-    'useminPrepare',
     'concurrent:dist',
+    'autoprefixer',
+    'copy:compasscss',
+    'useminPrepare',
     'jshint',
     'concat',
     

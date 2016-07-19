@@ -10,17 +10,6 @@ body{background: #eee;}
 	transition:all .5s ease;
 }
 
-/*fonts icos*/
-@font-face {
-	font-family: 'icomoon';
-           src: url('../fonts/icomoon.eot');
-           src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-                 url('../fonts/icomoon.woff') format('woff'),
-                 url('../fonts/icomoon.ttf') format('truetype'),
-                 url('../fonts/icomoon.svg#iconfont') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
 
 [class^="icon-"], [class*=" icon-"] {
 	font-family: 'icomoon';
@@ -145,6 +134,17 @@ body{background: #eee;}
 	bottom:0;
 	left:0;
 }
+
+
+.fr{
+	float:right
+}
+
+
+
+
+
+
 
 
 /* common style */

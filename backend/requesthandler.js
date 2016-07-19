@@ -1,16 +1,7 @@
-var connection = require('./connection'),
-	admin = require('./admin'),
-	security = require('./security'),
-	region = require('./region'),
-	audio = require('./audio'),
-	payment = require('./payment'),
-	province = require('./province');
-
-connection.init();
+var admin = require('./admin'),
+	file = require('./file'),
+	security = require('./security');
 
 exports.admin = admin;
+exports.file = file;
 exports.security = security;
-exports.region = region;
-exports.province = province;
-exports.audio = audio;
-exports.payment = payment;

@@ -2,9 +2,7 @@
   "name": "travelManage",
   "version": "0.0.0",
   "appPath": "app",
-  "dependencies":{
-  	
-  	
-   
+  "dependencies": {
+    "object.observe": "^0.2.6"
   }
 }

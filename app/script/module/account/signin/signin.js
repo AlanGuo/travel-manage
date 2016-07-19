@@ -6,8 +6,7 @@ var $ = require('$'),
     template = require('template'),
     binder = require('binder'),
     request = require('request'),
-    formatchecker = require('formatcheck'),
-    vercode = '/cgi-bin/security/verifycode';
+    formatchecker = require('formatcheck');
 
 var signinpageView = View.extend({
 
@@ -16,6 +15,7 @@ var signinpageView = View.extend({
     ctor:function(data){
         data.className = 'login-wrapper';
         this.$super(data);
+        document.domain = 'xunlei.com';
     },
 
     title:'登录',
@@ -26,12 +26,18 @@ var signinpageView = View.extend({
                 login:'',
                 userpassword:'',
                 vercode:''
-            },
-            src:vercode+'?random=' + Math.random()
+            }
         };
         this.$elem.html(template('account/signin'));
         this.$errorTips = ErrorTips.create({$elem:$('#errortips')});
         this.binderObject = binder.bind(this.$elem,this.data);
+
+        if(xlQuickLogin.isLogined()){
+            location.href = '#/index';
+        }
+        else{
+            xlQuickLogin.popup();
+        }
     },
 
     events:{
@@ -51,10 +57,10 @@ var signinpageView = View.extend({
                     self.$errorTips.show('请填写正确的密码');
                     return;
                 }
-                if(!formatchecker.notEmpty(postedData.vercode)){
-                    self.$errorTips.show('请填写验证码');
-                    return;
-                }
+                // if(!formatchecker.notEmpty(postedData.vercode)){
+                //     self.$errorTips.show('请填写验证码');
+                //     return;
+                // }
 
                 //登陆
                 this.$net.request({
@@ -64,13 +70,13 @@ var signinpageView = View.extend({
                         location.href = '#/index';
                     },
                     error:function(msg){
-                        self.data.src = vercode + '?random=' + Math.random();
+                        //self.data.src = vercode + '?random=' + Math.random();
                         self.$errorTips.show(msg);
                     }
                 });
             },
             'changevercode':function(){
-                this.data.src = vercode + '?random=' + Math.random();
+                //this.data.src = vercode + '?random=' + Math.random();
             },
             'forgetpassword':function(){
 
